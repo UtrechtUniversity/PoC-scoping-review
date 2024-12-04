@@ -1,0 +1,427 @@
+---
+title: "Evaluation of the probability of causation approach for lung cancer: Scoping review"
+subtitle: "Literature search"
+author: 
+  - name: Javier Mancilla Galindo
+    affiliation: Institute for Risk Assessment Sciences, Utrecht University, Utrecht, The Netherlands
+    orcid: 0000-0002-0718-467X
+    email: j.mancillagalindo@uu.nl
+abstract: |
+  <b>Objective:</b> The probability of causation  
+  <b>Introduction:</b> The probability of causation  
+  <b>Inclusion criteria:</b> The probability of causation 
+  <b>Methods:</b> The probability of causation 
+keywords: ["probability of causation", "assigned share", "lung cancer", "causality", "scoping review"]
+execute: 
+  echo: false
+  warning: false
+toc: true
+toc-depth: 1
+format:
+  html:
+    toc: true
+  docx:
+    reference-doc: ../docs/manuscript/template.docx
+    link-citations: true
+zotero: probability-of-causation
+bibliography: ../docs/manuscript/references.bib
+csl: ../docs/manuscript/american-medical-association.csl
+editor: source
+---
+
+{{< pagebreak >}}
+
+```{r}
+#| label: directories
+#| include: false
+
+# Create directories for sub-folders  
+inputfolder <- "../data/raw"
+psfolder <- "../data/processed"
+tempfolder <- "../data/temp"
+figfolder <- "../results/output_figures"
+tabfolder <- "../results/output_tables"
+
+dir.create(inputfolder, showWarnings = FALSE)
+dir.create(psfolder, showWarnings = FALSE)
+dir.create(tempfolder, showWarnings = FALSE)
+dir.create(figfolder, showWarnings = FALSE)
+dir.create(tabfolder, showWarnings = FALSE)
+```
+
+```{r}
+#| label: packages
+#| include: false 
+
+if (!require("pacman", quietly = TRUE)) {
+  install.packages("pacman")
+}
+
+pacman::p_load(
+  tidyverse,        # Used for basic data handling and visualization.
+  rentrez,          # Used to search PubMed.
+  XML,              # Used to parse XML data.
+  openalexR,        # Used to retrieve OpenAlex entries.
+  gt,               # Used to print html tables.  
+  report            # Used to cite packages used in this session.   
+)
+```
+
+## Session and package dependencies
+
+```{r}
+#| label: session
+# remove clutter
+session <- sessionInfo()
+session$BLAS <- NULL
+session$LAPACK <- NULL
+session$loadedOnly <- NULL
+# write log file
+writeLines(
+  capture.output(print(session, locale = FALSE)),
+  paste0("sessions/",lubridate::today(), "_literature_search.txt")
+)                                   
+
+session
+```
+
+# Introduction
+
+This review requires that a rapid overview of studies on the probability of causation (PoC) is obtained in a short time, reason why automated workflows will offer an advantage. The OpenAlex API is a tool that can be used to search for scientific articles and retrieve metadata from them. This tool will be used to search for articles on the PoC approach for lung cancer.
+
+The search will be conducted using the following keywords, based on the (Participants, Concept, Context) PCC framework:
+
+#### Population
+
+Adults of both sexes with a relevant exposure at their workplace environment.
+
+-   Workplace
+
+-   Working conditions
+
+-   Occupational
+
+#### Concept
+
+The application of the probability of causation principle.
+
+-   Probability of causation
+
+-   Probabilistic causation
+
+-   Balance of probabilities
+
+-   Aetiological fraction
+
+-   Etiologic fraction
+
+-   Causal fraction
+
+-   Attributable risk
+
+-   Attributable proportion
+
+-   Attributable fraction
+
+-   Proportional liability
+
+-   Causation
+
+-   Risk model
+
+-   Stochastic model
+
+-   Work attribution
+
+-   Assigned share
+
+#### Context
+
+The main outcome of interest is lung cancer. The search strategy will be broadened to include other types of cancer and as a third step, to include any multi-causal disease.
+
+-   Lung cancer
+
+-   Lung malignant neoplasm
+
+-   Lung tumor
+
+-   Lung Carcinogen
+
+-   Mesothelioma
+
+-   Multicausal/Multietiological disease
+
+-   Multicausal/Multietiological health effects
+
+{{< pagebreak >}}
+
+# PubMed search 
+
+## Results for any type of cancer 
+
+```{r}
+#| echo: true  
+query <- '((("Workplace*"[tiab] OR "Working Conditions"[tiab] OR "Employment"[tiab] OR "Occupational Exposure"[tiab] OR "Occupational Diseases"[tiab] OR "occupational exposure/analysis"[tiab] OR "occupational diseases/chemically induced"[tiab] OR "occupational diseases/epidemiology"[tiab] OR "occupational exposure/adverse effects"[tiab] OR "Workplace"[MeSH Terms] OR "Working Conditions"[MeSH Terms] OR "Employment"[MeSH Terms] OR "Occupational Exposure"[MeSH Terms] OR "Occupational Diseases"[MeSH Terms] OR "occupational exposure/analysis"[MeSH Major Topic] OR "occupational diseases/chemically induced"[MeSH Terms] OR "occupational diseases/epidemiology"[MeSH Terms] OR "occupational exposure/adverse effects"[MeSH Major Topic] OR "workers compensation/economics"[MeSH Major Topic] OR "workers compensation/statistics and numerical data"[MeSH Major Topic] OR "workers compensation"[MeSH Terms] OR "workers compensation"[tiab])) AND (("Probability of causation"[tiab] OR "Probabilistic causation"[tiab] OR "Balance of probabilities"[tiab] OR "Aetiological fraction"[tiab] OR "Etiologic fraction"[tiab] OR "Causal fraction"[tiab] OR "Attributable risk"[tiab] OR "Attributable proportion"[tiab] OR "Attributable fraction"[tiab] OR "Proportional liability"[tiab] OR "Causation"[tiab] OR "Risk model"[tiab] OR "Stochastic model"[tiab] OR "Work attribution"[tiab] OR "Assigned share"[tiab]))) AND (("neoplasms"[tiab] OR "Cancer"[tiab] OR "Carcinogens"[tiab] OR "neoplasms/epidemiology"[tiab] OR "neoplasms/etiology"[tiab] OR "neoplasms/mortality"[tiab] OR "Carcinogens"[MeSH Major Topic] OR "neoplasms/epidemiology"[MeSH Major Topic] OR "neoplasms/etiology"[MeSH Terms] OR "neoplasms/mortality"[MeSH Major Topic]))'
+```
+
+
+```{r}
+# Search PubMed and get the count
+search_results <- entrez_search(db="pubmed", term=query, retmax=0)
+total_count <- search_results$count
+cat("Total articles to retrieve:", total_count, "\n")
+```
+
+
+```{r}
+#| include: false
+
+source("scripts/PubMed_search.R")
+```
+
+
+```{r}
+# Save to CSV
+write.csv(results, paste0(inputfolder,"/",lubridate::today(),"_PubMed_PoC_Cancer.csv"), row.names = FALSE)
+
+# Print summary
+cat("\nRetrieval complete.\n")
+cat("Total articles retrieved:", nrow(results), "\n")
+cat("Articles with abstracts:", sum(!is.na(results$abstract)), "\n")
+cat("Articles with DOIs:", sum(!is.na(results$doi)), "\n")
+```
+
+{{< pagebreak >}}
+
+## Lung Cancer 
+
+```{r}
+#| echo: true  
+query <- '(((("Workplace"[tiab] OR "Working Conditions"[tiab] OR "Employment"[tiab] OR "Occupational Exposure"[tiab] OR "Occupational Diseases"[tiab] OR "occupational exposure/analysis"[tiab] OR "occupational diseases/chemically induced"[tiab] OR "occupational diseases/epidemiology"[tiab] OR "occupational exposure/adverse effects"[tiab] OR "Workplace"[MeSH Terms] OR "Working Conditions"[MeSH Terms] OR "Employment"[MeSH Terms] OR "Occupational Exposure"[MeSH Terms] OR "Occupational Diseases"[MeSH Terms] OR "occupational exposure/analysis"[MeSH Major Topic] OR "occupational diseases/chemically induced"[MeSH Terms] OR "occupational diseases/epidemiology"[MeSH Terms] OR "occupational exposure/adverse effects"[MeSH Major Topic] OR "workers compensation/economics"[MeSH Major Topic] OR "workers compensation/statistics and numerical data"[MeSH Major Topic] OR "workers compensation"[MeSH Terms] OR "workers compensation"[tiab])) AND (("Probability of causation"[tiab] OR "Probabilistic causation"[tiab] OR "Balance of probabilities"[tiab] OR "Aetiological fraction"[tiab] OR "Etiologic fraction"[tiab] OR "Causal fraction"[tiab] OR "Attributable risk"[tiab] OR "Attributable proportion"[tiab] OR "Attributable fraction"[tiab] OR "Proportional liability"[tiab] OR "Causation"[tiab] OR "Risk model"[tiab] OR "Stochastic model"[tiab] OR "Work attribution"[tiab] OR "Assigned share"[tiab]))) AND (("neoplasms"[tiab] OR "Cancer"[tiab] OR "Carcinogens"[tiab] OR "neoplasms/epidemiology"[tiab] OR "neoplasms/etiology"[tiab] OR "neoplasms/mortality"[tiab] OR "Carcinogens"[MeSH Major Topic] OR "neoplasms/epidemiology"[MeSH Major Topic] OR "neoplasms/etiology"[MeSH Terms] OR "neoplasms/mortality"[MeSH Major Topic]))) AND (("Lung"[Mesh] OR "Lung Diseases"[Mesh] OR lung[tiab] OR lungs[tiab] OR pulmonar*[tiab] OR bronchop*[tiab] OR bronchu*[tiab] OR bronchi*[tiab] OR trache*[tiab]))'
+```
+
+
+```{r}
+# Search PubMed and get the count
+search_results <- entrez_search(db="pubmed", term=query, retmax=0)
+total_count <- search_results$count
+cat("Total articles to retrieve:", total_count, "\n")
+```
+
+
+```{r}
+#| include: false
+
+source("scripts/PubMed_search.R")
+```
+
+
+```{r}
+# Save to CSV
+write.csv(results, paste0(inputfolder,"/",lubridate::today(),"_PubMed_PoC_Lung_Cancer.csv"), row.names = FALSE)
+
+# Print summary
+cat("\nRetrieval complete.\n")
+cat("Total articles retrieved:", nrow(results), "\n")
+cat("Articles with abstracts:", sum(!is.na(results$abstract)), "\n")
+cat("Articles with DOIs:", sum(!is.na(results$doi)), "\n")
+```
+
+{{< pagebreak >}}
+
+# OpenAlex search
+
+```{r}
+#| eval: false
+options(openalexR.mailto = "j.mancillagalindo@uu.nl")
+```
+
+```{r}
+# Define search terms for each part of the PCC framework
+population_terms <- c(
+  "workplace", 
+  "working conditions", 
+  "employment", 
+  "occupational exposure", 
+  "occupational diseases", 
+  "workers compensation"
+)
+concept_terms <- c(
+  "probability of causation", 
+  "probabilistic causation", 
+  "balance of probabilities", 
+  "aetiological fraction", 
+  "etiologic fraction", 
+  "causal fraction", 
+  "attributable risk", 
+  "attributable proportion", 
+  "attributable fraction", 
+  "proportional liability", 
+  "causation", 
+  "risk model", 
+  "stochastic model", 
+  "work attribution", 
+  "assigned share"
+)
+context_terms <- c(
+  "neoplasms", 
+  "cancer", 
+  "carcinogens"
+)
+additional_context_terms <- c(
+  "lung", 
+  "lungs", 
+  "pulmonary", 
+  "bronchopulmonary", 
+  "bronchus", 
+  "bronchi", 
+  "trachea"
+)
+
+# Create quoted terms
+population_quoted <- paste0('"', population_terms, '"')
+concept_quoted <- paste0('"', concept_terms, '"')
+context_quoted <- paste0('"', context_terms, '"')
+additional_context_quoted <- paste0('"', additional_context_terms, '"')
+```
+
+### Lung cancer 
+
+```{r}
+# Create the search string
+search_string <- str_glue(
+  "((({pop}) AND ({concept}) AND ({context}) AND ({add_context})))",
+  pop = paste(population_quoted, collapse = " OR "),
+  concept = paste(concept_quoted, collapse = " OR "),
+  context = paste(context_quoted, collapse = " OR "),
+  add_context = paste(additional_context_quoted, collapse = " OR ")
+)
+
+search_string
+```
+
+Query String (Open Alex)
+```{r}
+query_string <- str_glue(
+  "https://api.openalex.org/works?filter=title_and_abstract.search:{search}",
+  search = search_string
+)
+
+query_string
+```
+
+Search in open Alex with duration 
+
+```{r}
+#| eval: false
+start_time <- Sys.time()
+
+results <- oa_fetch(
+  search = search_string,
+  entity = "works"
+)
+
+end_time <- Sys.time()
+search_duration <- difftime(end_time, start_time)
+search_duration
+```
+
+```{r}
+saveRDS(
+  results, 
+  file = paste0(inputfolder, "/", lubridate::today(),"_OpenAlex_Lung_Cancer.rds")
+  )
+```
+
+
+### Any type of cancer 
+
+```{r}
+# Create the search string
+search_string <- str_glue(
+    "((({pop}) AND ({concept}) AND ({context})))",
+    pop = paste(population_quoted, collapse = " OR "),
+    concept = paste(concept_quoted, collapse = " OR "),
+    context = paste(context_quoted, collapse = " OR ")
+)
+
+search_string
+```
+
+Query String (Open Alex)
+```{r}
+query_string <- str_glue(
+  "https://api.openalex.org/works?filter=title_and_abstract.search:{search}",
+  search = search_string
+)
+
+query_string
+```
+
+Search in open Alex with duration 
+
+```{r}
+#| eval: false
+start_time <- Sys.time()
+
+results_cancer <- oa_fetch(
+  search = search_string,
+  entity = "works"
+)
+
+end_time <- Sys.time()
+search_duration <- difftime(end_time, start_time)
+search_duration
+```
+
+```{r}
+saveRDS(
+  results_cancer, 
+  file = paste0(inputfolder, "/", lubridate::today(),"_OpenAlex_Cancer.rds")
+  )
+```
+
+{{< pagebreak >}}
+
+
+# References
+
+::: {#refs}
+:::
+
+{{< pagebreak >}}
+
+# Session
+
+```{r}
+#| label: session
+# remove clutter
+session <- sessionInfo()
+session$BLAS <- NULL
+session$LAPACK <- NULL
+session$loadedOnly <- NULL
+# write log file
+writeLines(
+  capture.output(print(session, locale = FALSE)),
+  paste0("sessions/",lubridate::today(), "_search_OpenAlex.txt")
+)                                   
+
+session
+```
+
+# Package References
+
+```{r}
+#| output: asis
+report::cite_packages(session)
+```
+
+```{r}
+#| include: false
+
+# Run this chunk if you wish to clear your environment and unload packages.
+
+pacman::p_unload(negate = TRUE)
+
+rm(list = ls())
+```
