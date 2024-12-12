@@ -86,7 +86,8 @@ embase_lung_cancer <- load_search(
     isbn = issn,
     source = "embase"
   ) %>% 
-  select(all_of(columns))
+  select(all_of(columns)) %>% 
+  mutate_if(is.character, ~na_if(., ""))
 
 embase_cancer <- load_search(
   path = paste0(inputfolder, "/2024_12_02_EMBASE_PoC_Cancer.ris"),
@@ -99,7 +100,8 @@ embase_cancer <- load_search(
     isbn = issn,
     source = "embase"
   ) %>% 
-  select(all_of(columns))
+  select(all_of(columns)) %>% 
+  mutate_if(is.character, ~na_if(., ""))
 ```
 
 ```{r}
@@ -114,7 +116,8 @@ pubmed_cancer <- load_search(
     isbn = issn,
     source = "pubmed"
   ) %>% 
-  select(all_of(columns))
+  select(all_of(columns)) %>% 
+  mutate_if(is.character, ~na_if(., ""))
 
 pubmed_lung_cancer <- load_search(
   path = paste0(inputfolder, "/2024-12-03_PubMed_PoC_Lung_Cancer.csv"),
@@ -124,7 +127,8 @@ pubmed_lung_cancer <- load_search(
     isbn = issn,
     source = "pubmed"
   ) %>% 
-  select(all_of(columns))
+  select(all_of(columns)) %>% 
+  mutate_if(is.character, ~na_if(., ""))
 ```
 
 ```{r}
@@ -146,7 +150,8 @@ openalex_cancer <- load_search(
     isbn = primary_location.source.issn %>% str_replace_all("\\|", " "),
     source = "openalex"
   ) %>% 
-  select(all_of(columns))
+  select(all_of(columns)) %>% 
+  mutate_if(is.character, ~na_if(., ""))
 
 openalex_lung_cancer <- load_search(
   path = paste0(inputfolder, "/2024-12-03_OpenAlex_PoC_Lung_Cancer.csv"),
@@ -164,7 +169,8 @@ openalex_lung_cancer <- load_search(
     isbn = primary_location.source.issn %>% str_replace_all("\\|", " "),
     source = "openalex"
   ) %>% 
-  select(all_of(columns))
+  select(all_of(columns)) %>% 
+  mutate_if(is.character, ~na_if(., ""))
 ```
 
 There are a total of `r count(embase_lung_cancer)` records in EMBASE for lung cancer and `r count(embase_cancer)` records for all types of cancer; `r count(pubmed_lung_cancer)` records in PubMed for lung cancer and `r count(pubmed_cancer)` records for all types of cancer; and `r count(openalex_lung_cancer)` records in OpenAlex for lung cancer and `r count(openalex_cancer)` records for all types of cancer.
@@ -282,6 +288,8 @@ writeLines(
 
 session
 ```
+
+{{< pagebreak >}}
 
 # Package References
 

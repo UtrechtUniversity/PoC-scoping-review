@@ -1,0 +1,516 @@
+---
+title: "Evaluation of the probability of causation approach for cancer: Scoping review protocol"
+author: 
+  - name: Javier Mancilla Galindo
+    affiliation: Institute for Risk Assessment Sciences, Utrecht University, Utrecht, The Netherlands
+    orcid: 0000-0002-0718-467X
+    email: j.mancillagalindo@uu.nl
+  - name: Martijn A. H. Oude Voshaar
+    affiliation: Department of Public Health, Erasmus Medical Center, Rotterdam, The Netherlands
+  - name: David van Klaveren
+    affiliation: Department of Public Health, Erasmus Medical Center, Rotterdam, The Netherlands
+  - name: Susan Peters
+    affiliation: Institute for Risk Assessment Sciences, Utrecht University, Utrecht, The Netherlands
+abstract: |
+  <b>Objective:</b> The probability of causation  
+  <b>Introduction:</b> The probability of causation  
+  <b>Inclusion criteria:</b> The probability of causation 
+  <b>Methods:</b> The probability of causation 
+keywords: ["probability of causation", "assigned share", "cancer", "causality", "scoping review"]
+execute: 
+  echo: false
+  warning: false
+toc: true
+toc-depth: 1
+format:
+  html:
+    toc: true
+    code-tools: true
+  docx:
+    reference-doc: template.docx
+    link-citations: true
+zotero: probability-of-causation
+bibliography: references.bib
+csl: american-medical-association.csl
+editor: source
+---
+
+{{< pagebreak >}}
+
+#### Type of Review
+
+Scoping Review
+
+#### Review Stages
+
+This study will run in two stages: the first-stage will consist of a review of the scientific literature, whereas the second-stage will consist of a review of public policy documents of the application of the PoC for the financial compensation of lung cancer cases.
+
+The stages are as follows for the review of the **scientific literature**:
+
+1.  Protocol
+
+2.  Search
+
+3.  Pilot Screening (50 to 100 records)
+
+4.  Pilot Extraction (10 items)
+
+5.  Preregistration update
+
+6.  Screening
+
+7.  Extraction
+
+8.  Synthesis
+
+9.  Report (first-stage completed)
+
+For the review of **public policy documents**, these are the planned stages:
+
+1.  Search
+
+2.  Pilot Screening (50 to 100 records)
+
+3.  Pilot Extraction (10 items)
+
+4.  Preregistration update
+
+5.  Screening
+
+6.  Extraction
+
+7.  Synthesis
+
+8.  Report (review completed)
+
+#### Current Review Stage
+
+2.  Search (first stage)
+
+#### Start Date
+
+-   28-10-2024 (actual start date)
+
+-   1-03-2025 (second-stage, estimated start date)
+
+#### End Date
+
+-   28-02-2025 (first-stage, estimated end date)
+
+-   1-8-2025 (second-stage, estimated end date)
+
+{{< pagebreak >}}
+
+# Background
+
+The determination of the likelihood that an event was caused by a single exposure is of scientific, legal, philosophical, and practical interest. However, health outcomes are often multi-causal and it is practically difficult and often not possible to establish causality due to a single exposure, although examples for which assessment is relatively straight-forward exist (i.e., asbestos exposure and mesothelioma).[@Coenen2024] In occupational health, the determination of individual causality due to exposures at the workplace has important consequences for the financial compensation of workers, but this is limited by the ability to establish a certain diagnosis, the strength of the knowledge base for the disease, among other factors reviewed by Moon and Yoo.[@MoonYoo2021]
+
+The probability of causation (PoC) concept has been used in the the past and present to approximate what share of a health outcome is attributable to a single exposure. For a health outcome to be "more likely than not" caused by the exposure under investigation, the probability that it is responsible for the outcome should be greater than 0.5. In one of its simplest forms, the PoC of occupational contact dermatitis due to a work-related exposure is greater than 0.5 when at least half (4 out of 7) Mathias criteria are met.[@Mathias1989] In other cases, the attributable fraction (AF) is used to estimate whether there is a doubling in the relative risk (RR) for the outcome in the exposed compared to the non-exposed (RR = 2).[@GreenlandPoC1999] This, however, is a population-level estimate that seldom considers the individual exposure level. The preferred approach is the derivation of the quantitative exposure level above which the PoC is greater than 0.5, which can be derived from the exposure-response curve in epidemiological studies and systematic reviews with meta-regression.[@Siemiatycki2014]
+
+There are numerous examples of the use of the PoC for the financial compensation of workers who develop cancer. In the United Kingdom, partial or full financial compensation due to radiation exposure was informed by using PoC thresholds to the benefit of the claimant, starting at values lower than 0.5 to account for uncertainties such as error (systematic and random) and unknown generalizability of epidemiological estimates in different populations.[@Wakeford1998] In the United States[@NCICDCreport2003] and Canada[@Armstrong1988], upper confidence intervals have been used to establish a PoC = 0.5 threshold to compensate workers exposed to radiation.
+
+Despite its use in worker compensation schemes, there have been criticisms to the PoC approach, such as it not accounting for accelerated outcome occurrence (i.e., the disease would have occurred at a later time without the exposure) or the modifications in PoC due to varying background risk.[@GreenlandPoC1999; @Greenland2015] Thus, further examination of the use of the PoC in the scientific literature and health policy is relevant. A preliminary search of PubMed, Embase, and OpenAlex was conducted and no current or underway systematic reviews or scoping reviews on the topic were identified. 
+
+{{< pagebreak >}}
+
+# Research Questions
+
+### Primary Research Question:
+
+How has the Probability of Causation (PoC) principle been applied to evaluate the contribution of occupational exposures to lung cancer in worker populations?
+
+### Secondary Research Questions:
+
+1. **Study Design:**  
+   What are the study designs employed in lung cancer research that utilize the PoC principle?
+
+2. **Outcomes:**  
+   What types of outcomes are assessed using the PoC in lung cancer studies?
+
+3. **Exposures:**  
+   Which occupational exposures have been examined in lung cancer studies applying the PoC principle?
+
+4. **Population:**  
+   In which worker populations has the PoC been applied to study lung cancer?
+
+5. **Causal Assumptions:**  
+   What causal assumptions underlie the models used to apply the PoC in lung cancer research?
+
+6. **MModelling Approaches:**  
+   What variations in mathematical formulas and modeling approaches have been used to calculate the PoC in lung cancer studies?
+
+7. **Policy and Legal Frameworks:**  
+   How has the Probability of Causation principle been integrated into policy or legal frameworks for financial compensation of lung cancer cases?
+
+8. **Alternatives:**  
+   What alternative approaches or methodologies have been proposed or used in place of the Probability of Causation to assess the contribution of occupational exposures to lung cancer?
+
+{{< pagebreak >}}
+
+# Inclusion criteria
+
+Written according to the (Participants, Concept, Context) PCC framework.
+
+#### Population
+
+Adults of both sexes with a relevant occupational exposures relevant to workplace environments. 
+
+#### Concept
+
+Studies that involve the development, application, or evaluation of the Probability of Causation (PoC) principle using an exposure-response function to estimate thresholds where the likelihood of a health outcome being caused by a single exposure is greater than 0.5.
+
+#### Context
+
+The main outcome of interest is lung cancer. Depending on the volume and scope of the literature, the inclusion criteria may be broadened to include (1) other cancers with multi-causal etiologies or (2) other diseases where the PoC is applied to assess occupational exposures.
+
+# Types of sources
+
+### First Stage (Scientific Literature)
+
+This scoping review will consider both experimental (randomized controlled trials and non-randomized studies) and observational studies including prospective and retrospective cohort studies, case-control studies, analytical cross-sectional studies, and ecological studies. Systematic reviews reporting on the application of the PoC principle from an exposure-response curve will also be included. Other types of studies, such as case reports, case series, narrative reviews, editorials, commentaries, among others will be excluded from data charting, but may be used to inform the discussion. Both peer-reviewed and non-peer reviewed literature (i.e., pre-prints) will be considered for inclusion.
+
+### Second Stage (Public Policy Documents)
+
+Academic publications and the grey literature will be searched for descriptions of the use of the PoC for the financial compensation of workers. Diverse documents ranging from public policy documents, editorials, opinion papers, among others will be included if they describe case uses of the PoC for the financial compensation of workers who develop lung cancer. Both peer-reviewed and non-peer reviewed literature will be considered for inclusion. 
+
+A different search strategy may be defined for this second stage of the review. Details will be provided in a subsequent protocol update. 
+
+{{< pagebreak >}}
+
+# Methods
+
+## Search strategy
+
+The search strategy aims to find published studies in academic databases with large coverage of the medical literature. For the second stage of the review, interest will be on both academic databases and the grey literature, including public policy documents. The text words contained in the titles and abstracts of relevant articles, and the index terms used to describe the articles were used to develop a full search strategy are provided in Appendix 1 and Appendix 2. The search strategy, including all identified keywords and index terms will be adapted for each included information source.
+
+Studies will not be excluded due to language restrictions in the search strategy to avoid language publication bias.[@pieper2021]
+
+[Section in progress...]
+
+## Screening
+
+Title and abstracts that are not in the English, Spanish, Dutch, or German (languages spoken at highly skilled level by researchers involved in the review) will be translated to English using Google Translate. Agreement in systematic reviews using translations from the more recent Google Translate models has been reported to be higher than 80%, with inter-rater interpretations being a greater source of disagreement than inexact translations.[@Jackson2019] Potential inaccurate translations are not considered relevant for the purposes of this scoping review since the objective is to map existing literature and policy resources. Thus, attaining a large coverage of regions and languages is of higher relevance than highly precise data extraction.
+
+The machine learning asisted learning tool ASReview will be used to screen title and abstracts.[@Vandeschoot2021]
+
+[Section in progress...]
+
+{{< pagebreak >}}
+
+# References
+
+::: {#refs}
+:::
+
+{{< pagebreak >}}
+
+# Appendix 1: Pilot Search Strategy (Lung Cancer)
+
+An exploratory search of the literature was conducted in PubMed, Embase, OpenAlex, Policy Commons, and Overton. A summary of records is presented bellow:
+
+```{r}
+library(dplyr)
+library(gt)
+```
+
+
+```{r}
+summary_searches <- data.frame(
+  Database = c("PubMed", "Embase", "OpenAlex", "Policy Commons", "Overton"),
+  Records_Lung_Cancer = c(210, 289, 299, 1867, 7627),
+  Records_Ten_Years = c(51, 96, 124, 974, 4617)
+)
+
+summary_searches %>% 
+  gt %>% 
+  tab_header(title = "Summary of records for lung cancer") %>%
+  cols_label(
+    Records_Lung_Cancer = "Lung Cancer",
+    Records_Ten_Years = "Last 10 years"
+) %>%
+  tab_spanner(label = "Records", columns = 2:3)
+```
+
+The following terms were used for the search strategies and adapted for each database:
+
+### **Population**
+
+**Mesh Terms / Mesh Major Topic**
+
+-   "Workplace"\[MeSH Terms\]
+-   "Working Conditions"\[MeSH Terms\]
+-   "Employment"\[MeSH Terms\]
+-   "Occupational Exposure"\[MeSH Terms\]
+-   "Occupational Diseases"\[MeSH Terms\]
+-   "occupational exposure/analysis"\[MeSH Major Topic\]
+-   "occupational diseases/chemically induced"\[MeSH Terms\]
+-   "occupational diseases/epidemiology"\[MeSH Terms\]
+-   "occupational exposure/adverse effects"\[MeSH Major Topic\]
+-   "workers compensation/economics"\[MeSH Major Topic\]
+-   "workers compensation/statistics and numerical data"\[MeSH Major Topic\]
+-   "workers compensation"\[MeSH Terms\]
+
+### **Concept**
+
+**Entry Terms**
+
+-   Probability of causation
+-   Probabilistic causation
+-   Balance of probabilities
+-   Aetiological fraction
+-   Etiologic fraction
+-   Causal fraction
+-   Attributable risk
+-   Attributable proportion
+-   Attributable fraction
+-   Proportional liability
+-   Causation
+-   Risk model
+-   Stochastic model
+-   Work attribution
+-   Assigned share
+
+### **Context**
+
+**Entry Terms**
+
+-   Neoplasms
+-   Cancer
+-   Carcinogens
+
+**Mesh Terms / Mesh Major Topic**
+
+-   "Carcinogens"\[MeSH Major Topic\]
+-   "neoplasms/epidemiology"\[MeSH Major Topic\]
+-   "neoplasms/etiology"\[MeSH Terms\]
+-   "neoplasms/mortality"\[MeSH Major Topic\]
+
+### **Additional Context**
+
+**Entry Terms**
+
+-   Lung
+-   Lung Diseases
+-   Lung Cancer
+-   Pulmonary
+-   Bronchial
+-   Tracheal
+
+**Mesh Terms / Mesh Major Topic**
+
+-   "Lung"\[Mesh\]
+-   "Lung Diseases"\[Mesh\]
+-   "Lung Neoplasms"\[MeSH Major Topic\]
+
+{{< pagebreak >}}
+
+#### PubMed
+
+Population
+
+```         
+("Workplace"[tiab] OR "Working Conditions"[tiab] OR "Employment"[tiab] OR "Occupational Exposure"[tiab] OR "Occupational Diseases"[tiab] OR "occupational exposure/analysis"[tiab] OR "occupational diseases/chemically induced"[tiab] OR "occupational diseases/epidemiology"[tiab] OR "occupational exposure/adverse effects"[tiab] OR "Workplace"[MeSH Terms] OR "Working Conditions"[MeSH Terms] OR "Employment"[MeSH Terms] OR "Occupational Exposure"[MeSH Terms] OR "Occupational Diseases"[MeSH Terms] OR "occupational exposure/analysis"[MeSH Major Topic] OR "occupational diseases/chemically induced"[MeSH Terms] OR "occupational diseases/epidemiology"[MeSH Terms] OR "occupational exposure/adverse effects"[MeSH Major Topic] OR "workers compensation/economics"[MeSH Major Topic] OR "workers compensation/statistics and numerical data"[MeSH Major Topic] OR "workers compensation"[MeSH Terms] OR "workers compensation"[tiab])
+```
+
+Concept
+
+```         
+("Probability of causation"[tiab] OR "Probabilistic causation"[tiab] OR "Balance of probabilities"[tiab] OR "Aetiological fraction"[tiab] OR "Etiologic fraction"[tiab] OR "Causal fraction"[tiab] OR "Attributable risk"[tiab] OR "Attributable proportion"[tiab] OR "Attributable fraction"[tiab] OR "Proportional liability"[tiab] OR "Causation"[tiab] OR "Risk model"[tiab] OR "Stochastic model"[tiab] OR "Work attribution"[tiab] OR "Assigned share"[tiab])
+```
+
+Context
+
+```         
+("neoplasms"[tiab] OR "Cancer"[tiab] OR "Carcinogens"[tiab] OR "neoplasms/epidemiology"[tiab] OR "neoplasms/etiology"[tiab] OR "neoplasms/mortality"[tiab] OR "Carcinogens"[MeSH Major Topic] OR "neoplasms/epidemiology"[MeSH Major Topic] OR "neoplasms/etiology"[MeSH Terms] OR "neoplasms/mortality"[MeSH Major Topic])
+```
+
+Context (Additional)
+
+```         
+("Lung"[Mesh] OR "Lung Diseases"[Mesh] OR lung[tiab] OR lungs[tiab] OR pulmonar*[tiab] OR bronchop*[tiab] OR bronchu*[tiab] OR bronchi*[tiab] OR trache*[tiab])
+```
+
+{{< pagebreak >}}
+
+Full search string
+
+```         
+(((("Workplace"[tiab] OR "Working Conditions"[tiab] OR "Employment"[tiab] OR "Occupational Exposure"[tiab] OR "Occupational Diseases"[tiab] OR "occupational exposure/analysis"[tiab] OR "occupational diseases/chemically induced"[tiab] OR "occupational diseases/epidemiology"[tiab] OR "occupational exposure/adverse effects"[tiab] OR "Workplace"[MeSH Terms] OR "Working Conditions"[MeSH Terms] OR "Employment"[MeSH Terms] OR "Occupational Exposure"[MeSH Terms] OR "Occupational Diseases"[MeSH Terms] OR "occupational exposure/analysis"[MeSH Major Topic] OR "occupational diseases/chemically induced"[MeSH Terms] OR "occupational diseases/epidemiology"[MeSH Terms] OR "occupational exposure/adverse effects"[MeSH Major Topic] OR "workers compensation/economics"[MeSH Major Topic] OR "workers compensation/statistics and numerical data"[MeSH Major Topic] OR "workers compensation"[MeSH Terms] OR "workers compensation"[tiab])) AND (("Probability of causation"[tiab] OR "Probabilistic causation"[tiab] OR "Balance of probabilities"[tiab] OR "Aetiological fraction"[tiab] OR "Etiologic fraction"[tiab] OR "Causal fraction"[tiab] OR "Attributable risk"[tiab] OR "Attributable proportion"[tiab] OR "Attributable fraction"[tiab] OR "Proportional liability"[tiab] OR "Causation"[tiab] OR "Risk model"[tiab] OR "Stochastic model"[tiab] OR "Work attribution"[tiab] OR "Assigned share"[tiab]))) AND (("neoplasms"[tiab] OR "Cancer"[tiab] OR "Carcinogens"[tiab] OR "neoplasms/epidemiology"[tiab] OR "neoplasms/etiology"[tiab] OR "neoplasms/mortality"[tiab] OR "Carcinogens"[MeSH Major Topic] OR "neoplasms/epidemiology"[MeSH Major Topic] OR "neoplasms/etiology"[MeSH Terms] OR "neoplasms/mortality"[MeSH Major Topic]))) AND (("Lung"[Mesh] OR "Lung Diseases"[Mesh] OR lung[tiab] OR lungs[tiab] OR pulmonar*[tiab] OR bronchop*[tiab] OR bronchu*[tiab] OR bronchi*[tiab] OR trache*[tiab]))
+```
+
+Number of records: 210
+
+Restricting to last 10 years
+
+```         
+(((("Workplace"[tiab] OR "Working Conditions"[tiab] OR "Employment"[tiab] OR "Occupational Exposure"[tiab] OR "Occupational Diseases"[tiab] OR "occupational exposure/analysis"[tiab] OR "occupational diseases/chemically induced"[tiab] OR "occupational diseases/epidemiology"[tiab] OR "occupational exposure/adverse effects"[tiab] OR "Workplace"[MeSH Terms] OR "Working Conditions"[MeSH Terms] OR "Employment"[MeSH Terms] OR "Occupational Exposure"[MeSH Terms] OR "Occupational Diseases"[MeSH Terms] OR "occupational exposure/analysis"[MeSH Major Topic] OR "occupational diseases/chemically induced"[MeSH Terms] OR "occupational diseases/epidemiology"[MeSH Terms] OR "occupational exposure/adverse effects"[MeSH Major Topic] OR "workers compensation/economics"[MeSH Major Topic] OR "workers compensation/statistics and numerical data"[MeSH Major Topic] OR "workers compensation"[MeSH Terms] OR "workers compensation"[tiab])) AND (("Probability of causation"[tiab] OR "Probabilistic causation"[tiab] OR "Balance of probabilities"[tiab] OR "Aetiological fraction"[tiab] OR "Etiologic fraction"[tiab] OR "Causal fraction"[tiab] OR "Attributable risk"[tiab] OR "Attributable proportion"[tiab] OR "Attributable fraction"[tiab] OR "Proportional liability"[tiab] OR "Causation"[tiab] OR "Risk model"[tiab] OR "Stochastic model"[tiab] OR "Work attribution"[tiab] OR "Assigned share"[tiab]))) AND (("neoplasms"[tiab] OR "Cancer"[tiab] OR "Carcinogens"[tiab] OR "neoplasms/epidemiology"[tiab] OR "neoplasms/etiology"[tiab] OR "neoplasms/mortality"[tiab] OR "Carcinogens"[MeSH Major Topic] OR "neoplasms/epidemiology"[MeSH Major Topic] OR "neoplasms/etiology"[MeSH Terms] OR "neoplasms/mortality"[MeSH Major Topic]))) AND (("Lung"[Mesh] OR "Lung Diseases"[Mesh] OR lung[tiab] OR lungs[tiab] OR pulmonar*[tiab] OR bronchop*[tiab] OR bronchu*[tiab] OR bronchi*[tiab] OR trache*[tiab])) AND ("2014"[dp] : "2024"[dp])
+```
+
+Number of records (Last 10 years): 51
+
+{{< pagebreak >}}
+
+#### Embase
+
+```         
+(workplace:ti,ab OR 'working conditions':ti,ab OR employment:ti,ab OR 'occupational exposure':ti,ab OR 'occupational diseases':ti,ab OR 'occupational exposure'/exp OR 'occupational diseases'/exp OR 'occupational exposure/analysis' OR 'occupational diseases/chemically induced' OR 'occupational diseases/epidemiology' OR 'occupational exposure/adverse effects' OR 'workers compensation'/exp OR 'workers compensation/economics' OR 'workers compensation/statistics') AND ('probability of causation':ti,ab OR 'probabilistic causation':ti,ab OR 'balance of probabilities':ti,ab OR 'aetiological fraction':ti,ab OR 'etiologic fraction':ti,ab OR 'causal fraction':ti,ab OR 'attributable risk':ti,ab OR 'attributable proportion':ti,ab OR 'attributable fraction':ti,ab OR 'proportional liability':ti,ab OR causation:ti,ab OR 'risk model':ti,ab OR 'stochastic model':ti,ab OR 'work attribution':ti,ab OR 'assigned share':ti,ab) AND ('neoplasms':ti,ab OR cancer:ti,ab OR carcinogens:ti,ab OR 'neoplasm'/exp OR 'carcinogen'/exp OR 'neoplasms/epidemiology' OR 'neoplasms/etiology' OR 'neoplasms/mortality' OR 'carcinogen'/mj) AND ('lung'/exp OR 'lung diseases'/exp OR lung:ti,ab OR lungs:ti,ab OR pulmonar*:ti,ab OR bronchop*:ti,ab OR bronchu*:ti,ab OR bronchi*:ti,ab OR trache*:ti,ab)
+```
+
+Number of records: 289
+
+Restricting to last 10 years
+
+```         
+(workplace:ti,ab OR 'working conditions':ti,ab OR employment:ti,ab OR 'occupational exposure':ti,ab OR 'occupational diseases':ti,ab OR 'occupational exposure'/exp OR 'occupational diseases'/exp OR 'occupational exposure/analysis' OR 'occupational diseases/chemically induced' OR 'occupational diseases/epidemiology' OR 'occupational exposure/adverse effects' OR 'workers compensation'/exp OR 'workers compensation/economics' OR 'workers compensation/statistics') AND ('probability of causation':ti,ab OR 'probabilistic causation':ti,ab OR 'balance of probabilities':ti,ab OR 'aetiological fraction':ti,ab OR 'etiologic fraction':ti,ab OR 'causal fraction':ti,ab OR 'attributable risk':ti,ab OR 'attributable proportion':ti,ab OR 'attributable fraction':ti,ab OR 'proportional liability':ti,ab OR causation:ti,ab OR 'risk model':ti,ab OR 'stochastic model':ti,ab OR 'work attribution':ti,ab OR 'assigned share':ti,ab) AND ('neoplasms':ti,ab OR cancer:ti,ab OR carcinogens:ti,ab OR 'neoplasm'/exp OR 'carcinogen'/exp OR 'neoplasms/epidemiology' OR 'neoplasms/etiology' OR 'neoplasms/mortality' OR 'carcinogen'/mj) AND ('lung'/exp OR 'lung diseases'/exp OR lung:ti,ab OR lungs:ti,ab OR pulmonar*:ti,ab OR bronchop*:ti,ab OR bronchu*:ti,ab OR bronchi*:ti,ab OR trache*:ti,ab) AND [2014-2024]/py
+```
+
+Number of records (last 10 years): 96
+
+{{< pagebreak >}}
+
+#### OpenAlex
+
+```         
+https://api.openalex.org/works?filter=title_and_abstract.search:((("workplace" OR "working conditions" OR "employment" OR "occupational exposure" OR "occupational diseases" OR "workers compensation") AND ("probability of causation" OR "probabilistic causation" OR "balance of probabilities" OR "aetiological fraction" OR "etiologic fraction" OR "causal fraction" OR "attributable risk" OR "attributable proportion" OR "attributable fraction" OR "proportional liability" OR "causation" OR "risk model" OR "stochastic model" OR "work attribution" OR "assigned share") AND ("neoplasms" OR "cancer" OR "carcinogens") AND ("lung" OR "lungs" OR "pulmonary" OR "bronchopulmonary" OR "bronchus" OR "bronchi" OR "trachea")))
+```
+
+Number of records (title and abstract): 299
+
+Number of records (title and abstract, last 10 years): 124
+
+Number of records (full-text): 11290
+
+Number of records (full-text, last 10 years): 3951
+
+{{< pagebreak >}}
+
+#### Policy Commons
+
+Restricting to lung cancer only
+
+```         
+("workplace" OR "working conditions" OR "employment" OR "occupational exposure" OR "occupational diseases" OR "workers compensation")  AND  ("probability of causation" OR "probabilistic causation" OR "balance of probabilities" OR "aetiological fraction" OR "etiologic fraction" OR "causal fraction" OR "attributable risk" OR "attributable proportion" OR "attributable fraction" OR "proportional liability" OR "causation" OR "risk model" OR "stochastic model" OR "work attribution" OR "assigned share")  AND  ("neoplasms" OR "cancer" OR "carcinogens")  AND  ("lung" OR "lungs" OR "pulmonary" OR "bronchopulmonary" OR "bronchus" OR "bronchi" OR "trachea")
+```
+
+Number of records: 1867
+
+Number of records (last 10 years): 974
+
+{{< pagebreak >}}
+
+#### Overton
+
+```         
+("workplace" OR "working conditions" OR "employment" OR "occupational exposure" OR "occupational diseases" OR "workers compensation") 
+AND 
+("probability of causation" OR "probabilistic causation" OR "balance of probabilities" OR "aetiological fraction" OR "etiologic fraction" OR "causal fraction" OR "attributable risk" OR "attributable proportion" OR "attributable fraction" OR "proportional liability" OR "causation" OR "risk model" OR "stochastic model" OR "work attribution" OR "assigned share") 
+AND 
+("neoplasms" OR "cancer" OR "carcinogens") 
+AND 
+("lung" OR "lungs" OR "pulmonary" OR "bronchopulmonary" OR "bronchus" OR "bronchi" OR "trachea")
+```
+
+Number of records: 7627
+
+Number of records (last 10 years): 4617
+
+{{< pagebreak >}}
+
+# Appendix 2: Pilot Search Strategy (All types of cancer)
+
+```{r}
+summary_searches <- data.frame(
+  Database = c("PubMed", "Embase", "OpenAlex", "Policy Commons", "Overton"),
+  Records_Cancer = c(412, 559, 629, 3971, 13130),
+  Records_Ten_Years = c(120, 209, 276, 2155, 8018)
+)
+
+summary_searches %>% 
+  gt %>% 
+  tab_header(title = "Summary of records for all types of cancer") %>%
+  cols_label(
+    Records_Cancer = "All types of cancer",
+    Records_Ten_Years = "Last 10 years"
+) %>%
+  tab_spanner(label = "Records", columns = 2:3)
+```
+
+#### PubMed
+
+```         
+((("Workplace*"[tiab] OR "Working Conditions"[tiab] OR "Employment"[tiab] OR "Occupational Exposure"[tiab] OR "Occupational Diseases"[tiab] OR "occupational exposure/analysis"[tiab] OR "occupational diseases/chemically induced"[tiab] OR "occupational diseases/epidemiology"[tiab] OR "occupational exposure/adverse effects"[tiab] OR "Workplace"[MeSH Terms] OR "Working Conditions"[MeSH Terms] OR "Employment"[MeSH Terms] OR "Occupational Exposure"[MeSH Terms] OR "Occupational Diseases"[MeSH Terms] OR "occupational exposure/analysis"[MeSH Major Topic] OR "occupational diseases/chemically induced"[MeSH Terms] OR "occupational diseases/epidemiology"[MeSH Terms] OR "occupational exposure/adverse effects"[MeSH Major Topic] OR "workers compensation/economics"[MeSH Major Topic] OR "workers compensation/statistics and numerical data"[MeSH Major Topic] OR "workers compensation"[MeSH Terms] OR "workers compensation"[tiab])) AND (("Probability of causation"[tiab] OR "Probabilistic causation"[tiab] OR "Balance of probabilities"[tiab] OR "Aetiological fraction"[tiab] OR "Etiologic fraction"[tiab] OR "Causal fraction"[tiab] OR "Attributable risk"[tiab] OR "Attributable proportion"[tiab] OR "Attributable fraction"[tiab] OR "Proportional liability"[tiab] OR "Causation"[tiab] OR "Risk model"[tiab] OR "Stochastic model"[tiab] OR "Work attribution"[tiab] OR "Assigned share"[tiab]))) AND (("neoplasms"[tiab] OR "Cancer"[tiab] OR "Carcinogens"[tiab] OR "neoplasms/epidemiology"[tiab] OR "neoplasms/etiology"[tiab] OR "neoplasms/mortality"[tiab] OR "Carcinogens"[MeSH Major Topic] OR "neoplasms/epidemiology"[MeSH Major Topic] OR "neoplasms/etiology"[MeSH Terms] OR "neoplasms/mortality"[MeSH Major Topic]))
+```
+
+Number of records: 412
+
+Restricting to last 10 years
+
+```         
+((("Workplace*"[tiab] OR "Working Conditions"[tiab] OR "Employment"[tiab] OR "Occupational Exposure"[tiab] OR "Occupational Diseases"[tiab] OR "occupational exposure/analysis"[tiab] OR "occupational diseases/chemically induced"[tiab] OR "occupational diseases/epidemiology"[tiab] OR "occupational exposure/adverse effects"[tiab] OR "Workplace"[MeSH Terms] OR "Working Conditions"[MeSH Terms] OR "Employment"[MeSH Terms] OR "Occupational Exposure"[MeSH Terms] OR "Occupational Diseases"[MeSH Terms] OR "occupational exposure/analysis"[MeSH Major Topic] OR "occupational diseases/chemically induced"[MeSH Terms] OR "occupational diseases/epidemiology"[MeSH Terms] OR "occupational exposure/adverse effects"[MeSH Major Topic] OR "workers compensation/economics"[MeSH Major Topic] OR "workers compensation/statistics and numerical data"[MeSH Major Topic] OR "workers compensation"[MeSH Terms] OR "workers compensation"[tiab])) AND (("Probability of causation"[tiab] OR "Probabilistic causation"[tiab] OR "Balance of probabilities"[tiab] OR "Aetiological fraction"[tiab] OR "Etiologic fraction"[tiab] OR "Causal fraction"[tiab] OR "Attributable risk"[tiab] OR "Attributable proportion"[tiab] OR "Attributable fraction"[tiab] OR "Proportional liability"[tiab] OR "Causation"[tiab] OR "Risk model"[tiab] OR "Stochastic model"[tiab] OR "Work attribution"[tiab] OR "Assigned share"[tiab]))) AND (("neoplasms"[tiab] OR "Cancer"[tiab] OR "Carcinogens"[tiab] OR "neoplasms/epidemiology"[tiab] OR "neoplasms/etiology"[tiab] OR "neoplasms/mortality"[tiab] OR "Carcinogens"[MeSH Major Topic] OR "neoplasms/epidemiology"[MeSH Major Topic] OR "neoplasms/etiology"[MeSH Terms] OR "neoplasms/mortality"[MeSH Major Topic])) AND ("2014"[dp] : "2024"[dp])
+```
+
+Number of records (last 10 years): 120
+
+{{< pagebreak >}}
+
+#### Embase
+
+```         
+(workplace:ti,ab OR 'working conditions':ti,ab OR employment:ti,ab OR 'occupational exposure':ti,ab OR 'occupational diseases':ti,ab OR 'occupational exposure'/exp OR 'occupational diseases'/exp OR 'occupational exposure/analysis' OR 'occupational diseases/chemically induced' OR 'occupational diseases/epidemiology' OR 'occupational exposure/adverse effects' OR 'workers compensation'/exp OR 'workers compensation/economics' OR 'workers compensation/statistics') AND ('probability of causation':ti,ab OR 'probabilistic causation':ti,ab OR 'balance of probabilities':ti,ab OR 'aetiological fraction':ti,ab OR 'etiologic fraction':ti,ab OR 'causal fraction':ti,ab OR 'attributable risk':ti,ab OR 'attributable proportion':ti,ab OR 'attributable fraction':ti,ab OR 'proportional liability':ti,ab OR causation:ti,ab OR 'risk model':ti,ab OR 'stochastic model':ti,ab OR 'work attribution':ti,ab OR 'assigned share':ti,ab) AND ('neoplasms':ti,ab OR cancer:ti,ab OR carcinogens:ti,ab OR 'neoplasm'/exp OR 'carcinogen'/exp OR 'neoplasms/epidemiology' OR 'neoplasms/etiology' OR 'neoplasms/mortality' OR 'carcinogen'/mj)
+```
+
+Number of records: 559
+
+Restricting to last 10 years
+
+```         
+(workplace:ti,ab OR 'working conditions':ti,ab OR employment:ti,ab OR 'occupational exposure':ti,ab OR 'occupational diseases':ti,ab OR 'occupational exposure'/exp OR 'occupational diseases'/exp OR 'occupational exposure/analysis' OR 'occupational diseases/chemically induced' OR 'occupational diseases/epidemiology' OR 'occupational exposure/adverse effects' OR 'workers compensation'/exp OR 'workers compensation/economics' OR 'workers compensation/statistics') AND ('probability of causation':ti,ab OR 'probabilistic causation':ti,ab OR 'balance of probabilities':ti,ab OR 'aetiological fraction':ti,ab OR 'etiologic fraction':ti,ab OR 'causal fraction':ti,ab OR 'attributable risk':ti,ab OR 'attributable proportion':ti,ab OR 'attributable fraction':ti,ab OR 'proportional liability':ti,ab OR causation:ti,ab OR 'risk model':ti,ab OR 'stochastic model':ti,ab OR 'work attribution':ti,ab OR 'assigned share':ti,ab) AND ('neoplasms':ti,ab OR cancer:ti,ab OR carcinogens:ti,ab OR 'neoplasm'/exp OR 'carcinogen'/exp OR 'neoplasms/epidemiology' OR 'neoplasms/etiology' OR 'neoplasms/mortality' OR 'carcinogen'/mj) AND [2014-2024]/py
+```
+
+Number of records: 209
+
+{{< pagebreak >}}
+
+#### OpenAlex
+
+```         
+https://api.openalex.org/works?filter=title_and_abstract.search:((("workplace" OR "working conditions" OR "employment" OR "occupational exposure" OR "occupational diseases" OR "workers compensation") AND ("probability of causation" OR "probabilistic causation" OR "balance of probabilities" OR "aetiological fraction" OR "etiologic fraction" OR "causal fraction" OR "attributable risk" OR "attributable proportion" OR "attributable fraction" OR "proportional liability" OR "causation" OR "risk model" OR "stochastic model" OR "work attribution" OR "assigned share") AND ("neoplasms" OR "cancer" OR "carcinogens")))
+```
+
+Number of records (title and abstract): 629
+
+Number of records (title and abstract, last 10 years): 276
+
+Number of records (full-text): 22992
+
+Number of records (full-text, last 10 years): 8835
+
+{{< pagebreak >}}
+
+#### Policy Commons
+
+```         
+("workplace" OR "working conditions" OR "employment" OR "occupational exposure" OR "occupational diseases" OR "workers compensation")  AND  ("probability of causation" OR "probabilistic causation" OR "balance of probabilities" OR "aetiological fraction" OR "etiologic fraction" OR "causal fraction" OR "attributable risk" OR "attributable proportion" OR "attributable fraction" OR "proportional liability" OR "causation" OR "risk model" OR "stochastic model" OR "work attribution" OR "assigned share")  AND  ("neoplasms" OR "cancer" OR "carcinogens")  AND  ("lung" OR "lungs" OR "pulmonary" OR "bronchopulmonary" OR "bronchus" OR "bronchi" OR "trachea")
+```
+
+Number of records: 3971
+
+Number of records (last 10 years): 2155
+
+{{< pagebreak >}}
+
+#### Overton
+
+```         
+("workplace" OR "working conditions" OR "employment" OR "occupational exposure" OR "occupational diseases" OR "workers compensation") 
+AND 
+("probability of causation" OR "probabilistic causation" OR "balance of probabilities" OR "aetiological fraction" OR "etiologic fraction" OR "causal fraction" OR "attributable risk" OR "attributable proportion" OR "attributable fraction" OR "proportional liability" OR "causation" OR "risk model" OR "stochastic model" OR "work attribution" OR "assigned share") 
+AND 
+("neoplasms" OR "cancer" OR "carcinogens") 
+```
+
+Number of records: 13130
+
+Number of records (last 10 years): 8018
+
+{{< pagebreak >}}

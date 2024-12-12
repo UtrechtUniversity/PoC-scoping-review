@@ -1,6 +1,6 @@
-# My Project
+# Evaluation of the probability of causation approach for lung cancer: Scoping review
 
-This project template is a demonstration for the RepCo workshop.
+This is a scoping review of the methods applied for the calculation of the probability of causation (PoC) or assigned share of a disease or health outcome due to an (occupational) exposure. The main interests are on uses for lung cancer and its financial compensation in the context of occupational exposures, although flexibility will be allowed within the framework of a scoping review to gain further insight into the concept, methods, and potential alternatives in other use cases.
 
 ## Usage
 
