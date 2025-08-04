@@ -1,0 +1,9 @@
+No.,Query,Results,Date
+#8,"#1 AND #2 AND #3 AND #4 NOT ('letter':it OR 'editorial':it OR 'comment':it OR 'note':it OR 'news':it OR 'case reports':it OR 'conference abstract':it OR 'conference paper':it OR 'clinical trial':it)",650,13 May 2025
+#7,"#1 AND #2 AND #3 AND #4",948,13 May 2025
+#6,"#1 AND #2 AND #3",3403,13 May 2025
+#5,"#1 AND #2",17367,13 May 2025
+#4,"'lung'/exp OR 'lung disease'/exp OR 'lung tumor'/exp/mj OR 'lung adenocarcinoma'/exp OR 'small cell lung cancer'/exp OR 'non small cell lung cancer'/exp OR 'lung' OR 'lung diseases' OR 'lung cancer' OR 'pulmonar*' OR 'bronch*' OR 'trache*'",3559599,13 May 2025
+#3,"'carcinogen'/exp OR 'neoplasm'/exp OR 'squamous cell carcinoma'/exp OR 'lung adenocarcinoma'/exp OR 'small cell lung cancer'/exp OR 'non small cell lung cancer'/exp OR 'neoplasms' OR 'cancer*' OR 'carcinogens' OR 'malignant'",8164619,13 May 2025
+#2,"'workplace'/exp OR 'work environment'/exp OR 'employment'/exp OR 'occupational health'/exp OR 'occupational disease'/exp OR 'occupational exposure'/exp OR 'workman compensation'/exp OR 'work*' OR 'occupat*' OR 'manufactur*' OR 'job exposure matrix' OR 'jem'",4234398,13 May 2025
+#1,"'probability of causation' OR 'probabilistic causation' OR 'balance of probabilities' OR 'aetiological fraction' OR 'etiologic fraction'/exp OR 'etiologic fraction' OR 'causal fraction' OR 'attributable risk'/exp OR 'attributable risk' OR 'attributable proportion'/exp OR 'attributable proportion' OR 'attributable fraction'/exp OR 'attributable fraction' OR 'proportional liability' OR 'causation' OR 'risk model'/exp OR 'risk model' OR 'stochastic model'/exp OR 'stochastic model' OR 'work attribution' OR 'assigned share' OR 'causal exposure response' OR 'relative contribution' OR 'causal discovery'",124243,13 May 2025

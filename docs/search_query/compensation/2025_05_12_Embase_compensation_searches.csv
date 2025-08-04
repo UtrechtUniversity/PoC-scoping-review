@@ -1,0 +1,7 @@
+No.,Query,Results,Date
+#6,"#1 AND #2 AND #3 AND [2000-2025]/py",213,12 May 2025
+#5,"#1 AND #2 AND #3",297,12 May 2025
+#4,"#1 AND #2",4194,12 May 2025
+#3,"'damage*':ti,ab OR 'reparation*':ti,ab OR 'pecuniary':ti,ab OR 'economic loss':ti,ab OR 'financial loss':ti,ab OR 'lost wages':ti,ab OR 'pension':ti,ab OR 'life lost':ti,ab OR 'life expectancy'/exp OR 'quality of life'/exp OR 'immaterial':ti,ab OR 'non-economic':ti,ab OR 'pain and suffering':ti,ab OR 'suffering':ti,ab OR 'emotional':ti,ab OR 'moral':ti,ab OR 'mental anguish':ti,ab",2422704,12 May 2025
+#2,"'occupational disease'/exp OR 'work-related illness':ti,ab,kw OR 'occupational illness':ti,ab,kw",180264,12 May 2025
+#1,"'workman compensation'/exp OR 'compensation scheme':ti,ab,kw OR 'compensation system':ti,ab,kw",11783,12 May 2025

@@ -11,11 +11,12 @@ date: today
 execute: 
   echo: false
   warning: false
-toc: true
-toc-depth: 1
+fig-cap-location: top
 format:
   html:
     toc: true
+    toc-depth: 1
+    embed-resources: true
   docx:
     toc: false
     reference-doc: ../docs/manuscript/template.docx
@@ -39,12 +40,14 @@ psfolder <- "../data/processed"
 tempfolder <- "../data/temp"
 figfolder <- "../results/output_figures"
 tabfolder <- "../results/output_tables"
+asreview <- "../asreview"
 
 dir.create(inputfolder, showWarnings = FALSE)
 dir.create(psfolder, showWarnings = FALSE)
 dir.create(tempfolder, showWarnings = FALSE)
 dir.create(figfolder, showWarnings = FALSE)
 dir.create(tabfolder, showWarnings = FALSE)
+dir.create(asreview, showWarnings = FALSE)
 ```
 
 ```{r}
@@ -66,6 +69,329 @@ pacman::p_load(
 pacman::p_load_gh("camaradesuk/ASySD")  # Used to deduplicate studies
 
 ```
+
+# PoC Final Review Deduplication
+
+```{r}
+#| label: embase poc
+
+# Columns to select 
+columns <- c("record_id", "author", "year", "journal", "doi", "title", "pages",
+             "volume", "number", "abstract", "issn", "label", "source")
+
+# Load embase data 
+embase_poc <- load_search(
+  path = paste0(inputfolder, "/PoC/2025-05-14_Embase_PoC.ris"),
+  method = "ris"
+  ) %>% 
+  mutate(
+    abstract = N2,
+    author = A1,
+    number = issue,
+    source = "embase"
+  ) %>% 
+  select(all_of(columns)) %>% 
+  mutate_if(is.character, ~na_if(., ""))
+
+```
+
+```{r}
+#| label: pubmed poc
+
+# Load pubmed data 
+pubmed_poc <- load_search(
+  path = paste0(inputfolder, "/PoC/2025-05-13_PubMed_PoC.csv"),
+  method = "csv"
+  ) %>% 
+  mutate(
+    source = "pubmed"
+  ) %>% 
+  select(all_of(columns)) %>% 
+  mutate_if(is.character, ~na_if(., ""))
+
+```
+
+```{r}
+#| label: openalex poc
+#| include: false
+
+# Load OpenAlex data
+openalex_source <- readRDS(paste0(inputfolder, "/PoC/2025-05-14_OpenAlex.rds"))
+
+# Load manually added records from a broader OpenAlex search, with exact matches of key concepts.
+openalex_extra <- readRDS(paste0(inputfolder, "/PoC/2025-05-14_OpenAlex_extra.rds")) 
+
+# Check if id in openalex_extra is in openalex_source 
+semi_join(openalex_extra, openalex_source, by = "id") %>% 
+  count()
+
+# There are no duplicates, so we can bind the two datasets and 
+# prepare data for ASySD deduplication.
+openalex_poc <- openalex_source %>% 
+  bind_rows(openalex_extra) %>%
+  filter(type %in% c("preprint", "article")) %>% 
+  mutate(
+    record_id = id,
+    author = map_chr(author, ~ if (is.data.frame(.x)) {
+      paste(.x$au_display_name, collapse = "; ")
+    } else {
+      NA_character_ 
+    }),
+    year = as.character(publication_year), 
+    journal = so,
+    pages = case_when(
+      !is.na(first_page) & !is.na(last_page) & first_page == last_page ~ as.character(first_page),
+      !is.na(first_page) & !is.na(last_page) ~ paste0(first_page, "-", last_page),
+      !is.na(first_page) ~ as.character(first_page),
+      !is.na(last_page) ~ as.character(last_page),
+      TRUE ~ NA_character_
+      ),
+    number = issue, 
+    abstract = ab,
+    issn = issn_l,
+    doi = str_replace(doi, "https://doi.org/", ""),
+    source = "open_alex",
+    label = NA_character_
+  ) %>% 
+  select(all_of(columns)) 
+
+rm(openalex_source, openalex_extra)
+```
+
+There are a total of `r count(embase_poc)` records in Embase, `r count(pubmed_poc)` records in PubMed, and `r count(openalex_poc)` records in OpenAlex.
+
+A plot of missing data for corroboration before deduplication is shown in **Figure 1**. Missing data should be lower than 100% for all variables, except for `record_id` and `label`, which are optional. Overall, **PubMed** has the least amount of missing data, so it will be used as the preferred source to keep in the deduplication procedure to minimize the amount of manual corroborations needed.
+
+```{r}
+#| label: missing poc
+#| fig-cap: "**Figure 1**. Missing data per database for the PoC datasets"
+#| fig-subcap:
+#|   - "PubMed"
+#|   - "Embase"
+#|   - "OpenAlex"
+#| layout-ncol: 2
+
+overview_na(pubmed_poc)
+overview_na(embase_poc)
+overview_na(openalex_poc)
+```
+
+```{r}
+#| label: merge poc
+# Bind Embase, PubMed, and OpenAlex 
+records_poc <- bind_rows(
+  embase_poc, 
+  pubmed_poc,
+  openalex_poc
+  ) %>% 
+  mutate(
+    # Make doi lowercase 
+    doi = str_to_lower(doi)
+  )
+
+```
+
+There are a total of `r count(records_poc)` records. These will be deduplicated using the Automated Systematic Search Deduplicator (ASySD).[@ASySD2023]
+
+```{r}
+#| label: deduplication poc
+
+# Deduplicate studies
+poc_deduplicated <- dedup_citations(
+  records_poc, 
+  keep_source = "pubmed",
+  manual_dedup =  TRUE,
+  show_unknown_tags = FALSE,
+  user_input = 1
+  )
+
+poc_unique <- poc_deduplicated$unique 
+poc_manual_dedup <- poc_deduplicated$manual_dedup %>% 
+  mutate(
+    result = case_when(
+      doi >0.9999 ~ TRUE, 
+      TRUE ~ NA
+    )
+  )
+```
+
+
+```{r}
+#| eval: false
+true_dups <- manual_dedup_shiny(poc_manual_dedup)
+saveRDS(true_dups, file = paste0(tempfolder, "/", lubridate::today(),"_true_duplicates_PoC.rds"))
+```
+
+
+```{r}
+true_dups <- readRDS(paste0(tempfolder, "/2025-06-04_true_duplicates_PoC.rds")) 
+poc_final_dedup <- dedup_citations_add_manual(poc_unique, additional_pairs = true_dups)
+```
+
+Search for remaining duplicates by doi: 
+```{r}
+# There are remaining duplicates by doi 
+poc_final_dedup %>% 
+  group_by(doi) %>% 
+  mutate(n = n()) %>% 
+  filter(n > 1 & !is.na(doi)) %>%
+  ungroup() %>% 
+  arrange(doi) %>% 
+  count()
+```
+
+
+```{r}
+# Helper function
+assign_source_priority <- function(df) {
+  df %>%
+    mutate(source_priority = case_when(
+      str_detect(source, "pubmed") ~ 1,
+      str_detect(source, "embase") ~ 2,
+      str_detect(source, "open_alex") ~ 3,
+      TRUE ~ 4
+    ))
+}
+
+# Deduplicate by DOI (excluding NA)
+dedup_part <- poc_final_dedup %>%
+  filter(!is.na(doi)) %>%
+  assign_source_priority() %>%
+  group_by(doi) %>%
+  arrange(source_priority) %>%
+  summarise(
+    across(-c(source, record_ids, source_priority), first),
+    source = paste(source, collapse = ", "),
+    record_ids = paste(record_ids, collapse = ", "),
+    .groups = "drop"
+  )
+
+# Keep rows with missing DOI
+dedup_na_part <- poc_final_dedup %>%
+  filter(is.na(doi))
+
+# Combine and deduplicate further by title, then abstract
+records_final_unique <- bind_rows(dedup_part, dedup_na_part) %>%
+  assign_source_priority() %>%
+  group_by(title) %>%
+  arrange(source_priority) %>%
+  summarise(
+    across(-c(source, record_ids, source_priority), first),
+    source = paste(source, collapse = ", "),
+    record_ids = paste(record_ids, collapse = ", "),
+    .groups = "drop"
+  ) %>%
+  assign_source_priority() %>%
+  group_by(abstract) %>%
+  arrange(source_priority) %>%
+  summarise(
+    across(-c(source, record_ids, source_priority), first),
+    source = paste(source, collapse = ", "),
+    record_ids = paste(record_ids, collapse = ", "),
+    .groups = "drop"
+  ) %>%
+  ungroup()
+
+# Clean abstract and filter html tag entries
+records_final_unique <- records_final_unique %>%
+  mutate(
+    abstract = str_remove_all(abstract, "<h3>|</h3>|<sup>\\d+</sup>")
+  ) %>%
+  filter(!str_detect(abstract, "^[^a-zA-Z]")) %>%
+  select(
+    duplicate_id, author, year, journal, doi, title, abstract,
+    pages, volume, number, issn, record_ids, source, isbn, label
+  )
+```
+
+
+```{r}
+write_citations(
+  records_final_unique,
+  type = "csv",
+  filename = paste0(psfolder, "/PoC/2025-05-14_search_PoC_deduplicated.csv")
+  )
+```
+
+After deduplication, there are a total of `r count(records_final_unique)` studies. 
+
+{{< pagebreak >}}
+
+## ASReview labels
+
+```{r}
+asreview_random <- read.csv(
+  paste0(asreview, "/2025_06_04_Random_Evaluation_of_the_probability_of_causation_for_lung_cancer_workers_compensation.csv"),
+  na.strings = c("", "NA")
+  ) %>% 
+  select(-c("label", "isbn"))
+
+asreview_pilot <- read.csv(
+  paste0(asreview, "/2024_12_21_pilot_screening_Evaluation of the probability of causation approach for lung cancer_ Scoping review_asreview_dataset_relevant.csv"),
+  sep=";",
+  na.strings = c("", "NA")
+  )
+
+# Priorly reviewed studies from the broad OpenAlex search that will be used as priors 
+relevant <- c(
+  '10.2307/2531765',
+  '10.1371/journal.pone.0096099',
+  '10.1002/sim.4780100113',
+  '10.1097/00004032-199903000-00008',
+  '10.1111/j.1539-6924.1984.tb00142.x',
+  '10.1111/j.1539-6924.1986.tb00227.x',
+  '10.1097/01.hp.0000285798.55584.6d',
+  '10.1186/s40557-018-0220-5',
+  '10.1097/01.hp.0000305824.21020.10',
+  '10.1080/02698590903197757',
+  '10.1093/lpr/mgx012',
+  '10.3961/jpmph.16.002',
+  '10.1177/0193841x9902300603'
+)
+
+irrelevant <- c(
+  '10.1371/journal.pone.0108358',
+  '10.7326/0003-4819-107-4-581',
+  '10.1073/pnas.1520213113', 
+  '10.1002/ajim.22063',
+  '10.1002/ajim.22159'
+)
+
+```
+
+
+```{r}
+asreview_labelled <- asreview_random %>% 
+  mutate(
+    asreview_label = case_when(
+      title %in% asreview_pilot$title ~ 1,
+      TRUE ~ asreview_label),
+    asreview_label = case_when(
+      doi %in% relevant ~ 1,
+      doi %in% irrelevant ~ 0,
+      TRUE ~ asreview_label),
+    asreview_time = case_when(
+      title %in% asreview_pilot$title ~ "2024-12-21 12:00:00",
+      doi %in% relevant ~ "2025-05-14 12:00:00",
+      doi %in% irrelevant ~ "2025-05-14 12:00:00",
+      TRUE ~ asreview_time)
+  )
+```
+
+```{r}
+write.csv(
+  asreview_labelled,
+  paste0(psfolder, "/PoC/2025_06_04_PoC_for_asreview.csv"),
+  row.names = FALSE
+  )
+```
+
+
+
+# Pilot Search Deduplication
+
+The pilot search strategy was conducted on 2 December 2025 in Embase, PubMed, and OpenAlex. Documentation of search strings is available in the research protocol ([protocol-scoping-review.qmd](../docs/manuscript/protocol-scoping-review.qmd))
+
 
 ```{r}
 #| label: embase data
@@ -173,29 +499,29 @@ openalex_lung_cancer <- load_search(
   mutate_if(is.character, ~na_if(., ""))
 ```
 
-There are a total of `r count(embase_lung_cancer)` records in EMBASE for lung cancer and `r count(embase_cancer)` records for all types of cancer; `r count(pubmed_lung_cancer)` records in PubMed for lung cancer and `r count(pubmed_cancer)` records for all types of cancer; and `r count(openalex_lung_cancer)` records in OpenAlex for lung cancer and `r count(openalex_cancer)` records for all types of cancer.
+There are a total of `r count(embase_lung_cancer)` records in Embase for lung cancer and `r count(embase_cancer)` records for all types of cancer; `r count(pubmed_lung_cancer)` records in PubMed for lung cancer and `r count(pubmed_cancer)` records for all types of cancer; and `r count(openalex_lung_cancer)` records in OpenAlex for lung cancer and `r count(openalex_cancer)` records for all types of cancer.
 
-A plot of missing data for corroboration before deduplication is shown in the Figure. Missing data should be lower than 100% for all variables, except for `record_id` and `label`, which are optional.
+A plot of missing data for corroboration before deduplication is shown in **Figure 2**. Missing data should be lower than 100% for all variables, except for `record_id` and `label`, which are optional. Overall, **PubMed** has the least amount of missing data, so it will be used as the preferred source to keep in the deduplication procedure to minimize the amount of manual corroborations needed.
 
 ```{r}
-#| label: missing_embase
-#| fig-cap: 
-#|   - "EMBASE: Lung Cancer"
-#|   - "EMBASE: Cancer"
+#| label: missing
+#| fig-cap: "**Figure 2**. Missing data per database"
+#| fig-subcap:
 #|   - "PubMed: Lung Cancer"
 #|   - "PubMed: Cancer"
-#|   - "OAlex: Lung Cancer"
-#|   - "OAlex: Cancer"
+#|   - "Embase: Lung Cancer" 
+#|   - "Embase: Cancer"
+#|   - "OpenAlex: Lung Cancer"
+#|   - "OpenAlex: Cancer"
 #| layout-ncol: 2
 
-overview_na(embase_lung_cancer)
-overview_na(embase_cancer)
 overview_na(pubmed_lung_cancer)
 overview_na(pubmed_cancer)
+overview_na(embase_lung_cancer)
+overview_na(embase_cancer)
 overview_na(openalex_lung_cancer)
 overview_na(openalex_cancer)
 ```
-
 
 ```{r}
 #| label: merge
@@ -219,16 +545,16 @@ There are a total of `r count(records_lung_cancer)` records for lung cancer and 
 #| label: deduplication
 
 # Deduplicate lung cancer studies
-lung_cancer_deduplicated <- dedup_citations(records_lung_cancer, keep_source = "pubmed")
+lung_cancer_deduplicated <- dedup_citations(records_lung_cancer, keep_source = "embase")
 lung_cancer_unique <- lung_cancer_deduplicated$unique
 
 # Deduplicate cancer studies
-cancer_deduplicated <- dedup_citations(records_cancer, keep_source = "pubmed")
+cancer_deduplicated <- dedup_citations(records_cancer, keep_source = "embase")
 cancer_unique <- cancer_deduplicated$unique
 
 ```
 
-After deduplication, there are a total of `r count(lung_cancer_unique)` studies for the lung cancer search and `r count(cancer_unique)` records for all types of cancer. However, there are remaining potentially duplicated items to review manually: `r lung_cancer_unique %>% count(doi) %>% filter(n > 1) %>% count()` repeated doi for lung cancer and `r cancer_unique %>% count(doi) %>% filter(n > 1) %>% count()` repeated doi for all types of cancer. I will add a label for manual review
+After deduplication, there are a total of `r count(lung_cancer_unique)` studies for the lung cancer search and `r count(cancer_unique)` records for all types of cancer. However, there are remaining potentially duplicated items to review manually: `r lung_cancer_unique %>% count(doi) %>% filter(n > 1) %>% count()` repeated doi for lung cancer and `r cancer_unique %>% count(doi) %>% filter(n > 1) %>% count()` repeated doi for all types of cancer. I will add a label for manual review to these records.
 
 ```{r}
 #| label: manual_review
@@ -260,6 +586,54 @@ write.csv(
   paste0(psfolder,"/",lubridate::today(),"_search_PoC_Cancer_deduplicated.csv"),
   row.names = FALSE
   )
+```
+
+{{< pagebreak >}}
+
+# Manual deduplication
+
+Manual deduplication was carried out in excel by first examining the repeated DOIs and then comparing the records for potential duplicates. Subsequently, empty abstract fields were searched in Google Scholar, WorldCat, and journal websites and added to the records when found. A summary of deduplicated records is as follows:
+
+```{r}
+#| label: summary
+dediplication_summary <- data.frame(
+  Field = c(
+    "DOI removed", "DOI non-duplicates", "DOI missing", 
+    "Title duplicates", "Removed (other)",
+    "Abstract added", "Abstract not available", "Total Complete"
+    ),
+  Lung_Cancer = c(44, 2, 64, 21, 63, 50, 21, 453),
+  Cancer = c(NA, NA, NA, NA, NA, NA, NA, NA)
+) 
+
+dediplication_summary %>% 
+  gt %>% 
+  cols_hide("Cancer")
+
+```
+
+Other records removed corresponded to:
+
+-   bibliography lists (1793, 1794, 1796, 1798);
+
+-   journal decision letters (1787, 1788, 1789);
+
+-   news highlights (1777, 1779, 1784)
+
+-   duplicated publication in different journals (1453 kept - 1451 removed; 1421 kept - 1568 removed);
+
+-   a record (1079 kept) presented multiple times in different conferences (1092, 1098); and
+
+-   uncurated abstracts (n = 49) that would preclude the usefulness of the training set for assisted learning and keyword identification with `litsearchr`.
+
+A total of **`r dediplication_summary %>% filter(Field == "Total Complete") %>% pull(Lung_Cancer)`** manually duplicated records for lung cancer will be used for pilot screening.
+
+```{r}
+# Extract value from dediplication_summary for total complete
+
+total_lung_cancer <- dediplication_summary %>% 
+  filter(Field == "Total Complete") %>% 
+  pull(Lung_Cancer)
 ```
 
 {{< pagebreak >}}

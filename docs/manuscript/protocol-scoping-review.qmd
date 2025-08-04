@@ -1,5 +1,5 @@
 ---
-title: "Evaluation of the probability of causation approach for cancer: Scoping review protocol"
+title: "Evaluation of the probability of causation approach for lung cancer: Scoping review protocol"
 author: 
   - name: Javier Mancilla Galindo
     affiliation: Institute for Risk Assessment Sciences, Utrecht University, Utrecht, The Netherlands
@@ -7,8 +7,12 @@ author:
     email: j.mancillagalindo@uu.nl
   - name: Martijn A. H. Oude Voshaar
     affiliation: Department of Public Health, Erasmus Medical Center, Rotterdam, The Netherlands
+  - name: Lützen Portengen
+    affiliation: Institute for Risk Assessment Sciences, Utrecht University, Utrecht, The Netherlands
   - name: David van Klaveren
     affiliation: Department of Public Health, Erasmus Medical Center, Rotterdam, The Netherlands
+  - name: Roel Vermeulen
+    affiliation: Institute for Risk Assessment Sciences, Utrecht University, Utrecht, The Netherlands
   - name: Susan Peters
     affiliation: Institute for Risk Assessment Sciences, Utrecht University, Utrecht, The Netherlands
 abstract: |
@@ -37,113 +41,81 @@ editor: source
 
 {{< pagebreak >}}
 
+# Scoping Review Protocol
+
 #### Type of Review
 
-Scoping Review
+-   **Scoping Review**
 
 #### Review Stages
 
-This study will run in two stages: the first-stage will consist of a review of the scientific literature, whereas the second-stage will consist of a review of public policy documents of the application of the PoC for the financial compensation of lung cancer cases.
-
-The stages are as follows for the review of the **scientific literature**:
-
 1.  Protocol
-
 2.  Search
-
 3.  Pilot Screening (50 to 100 records)
-
 4.  Pilot Extraction (10 items)
-
-5.  Preregistration update
-
-6.  Screening
-
-7.  Extraction
-
-8.  Synthesis
-
-9.  Report (first-stage completed)
-
-For the review of **public policy documents**, these are the planned stages:
-
-1.  Search
-
-2.  Pilot Screening (50 to 100 records)
-
-3.  Pilot Extraction (10 items)
-
-4.  Preregistration update
-
-5.  Screening
-
-6.  Extraction
-
-7.  Synthesis
-
-8.  Report (review completed)
+5.  Preregistration
+6.  Search update
+7.  Screening
+8.  Extraction
+9.  Synthesis
+10. Report
 
 #### Current Review Stage
 
-2.  Search (first stage)
+7.  Screening
 
 #### Start Date
 
 -   28-10-2024 (actual start date)
 
--   1-03-2025 (second-stage, estimated start date)
-
 #### End Date
 
--   28-02-2025 (first-stage, estimated end date)
+-   31-10-2025 (estimated end date)
 
--   1-8-2025 (second-stage, estimated end date)
+#### Disclosure
+
+This protocol has been written and is kept updated by JMG. Coauthors have provided feedback on the review objectives and plan and are listed here to recognize their intellectual contributions. However, this does not mean that all coauthors approved all version updates of the protocol.
 
 {{< pagebreak >}}
 
 # Background
 
-The determination of the likelihood that an event was caused by a single exposure is of scientific, legal, philosophical, and practical interest. However, health outcomes are often multi-causal and it is practically difficult and often not possible to establish causality due to a single exposure, although examples for which assessment is relatively straight-forward exist (i.e., asbestos exposure and mesothelioma).[@Coenen2024] In occupational health, the determination of individual causality due to exposures at the workplace has important consequences for the financial compensation of workers, but this is limited by the ability to establish a certain diagnosis, the strength of the knowledge base for the disease, among other factors reviewed by Moon and Yoo.[@MoonYoo2021]
+The determination of the likelihood that an event was caused by a single exposure is of scientific, legal, philosophical, and of practical interest. However, health outcomes are often multi-causal and it is practically difficult and often not possible to establish causality due to a single exposure, although examples for which assessment is relatively straight-forward exist (i.e., asbestos exposure and mesothelioma).[@Coenen2024] In occupational health, the determination of individual causality due to exposures at the workplace has important consequences for the financial compensation of workers, but this is limited by the ability to establish a certain diagnosis, the strength of the knowledge base for the disease, among other factors reviewed by Moon and Yoo.[@MoonYoo2021]
 
-The probability of causation (PoC) concept has been used in the the past and present to approximate what share of a health outcome is attributable to a single exposure. For a health outcome to be "more likely than not" caused by the exposure under investigation, the probability that it is responsible for the outcome should be greater than 0.5. In one of its simplest forms, the PoC of occupational contact dermatitis due to a work-related exposure is greater than 0.5 when at least half (4 out of 7) Mathias criteria are met.[@Mathias1989] In other cases, the attributable fraction (AF) is used to estimate whether there is a doubling in the relative risk (RR) for the outcome in the exposed compared to the non-exposed (RR = 2).[@GreenlandPoC1999] This, however, is a population-level estimate that seldom considers the individual exposure level. The preferred approach is the derivation of the quantitative exposure level above which the PoC is greater than 0.5, which can be derived from the exposure-response curve in epidemiological studies and systematic reviews with meta-regression.[@Siemiatycki2014]
+The probability of causation (PoC) concept has been used in the the past to approximate what share of a health outcome is attributable to a single exposure. For a health outcome to be "more likely than not" caused by the exposure under investigation, the probability that it is responsible for the outcome should be greater than 0.5. The way of obtaining the PoC can be by scoring more than half of the criteria for occupational dermatitis,[@Mathias1989] through the attributable fraction (AF) when there is a doubling in the relative risk (RR) for the outcome in the exposed compared to the non-exposed (RR = 2),[@GreenlandPoC1999] or by a quantitative exposure threshold above which the RR is greater than 0.5 obtained from the exposure-response curve in single epidemiological studies and meta-analysis of published studies.[@Siemiatycki2014]
 
-There are numerous examples of the use of the PoC for the financial compensation of workers who develop cancer. In the United Kingdom, partial or full financial compensation due to radiation exposure was informed by using PoC thresholds to the benefit of the claimant, starting at values lower than 0.5 to account for uncertainties such as error (systematic and random) and unknown generalizability of epidemiological estimates in different populations.[@Wakeford1998] In the United States[@NCICDCreport2003] and Canada[@Armstrong1988], upper confidence intervals have been used to establish a PoC = 0.5 threshold to compensate workers exposed to radiation.
+In the United Kingdom, partial or full financial compensation due to radiation exposure was informed by using PoC thresholds to the benefit of the claimant, by lowering the compensation threshold to values lower than 0.5 to account for uncertainties such as error (systematic and random) and unknown generalizability of epidemiological estimates in different populations.[@Wakeford1998] In the United States[@NCICDCreport2003] and Canada[@Armstrong1988], upper confidence intervals have been used to establish a PoC = 0.5 threshold to compensate workers exposed to radiation.
 
-Despite its use in worker compensation schemes, there have been criticisms to the PoC approach, such as it not accounting for accelerated outcome occurrence (i.e., the disease would have occurred at a later time without the exposure) or the modifications in PoC due to varying background risk.[@GreenlandPoC1999; @Greenland2015] Thus, further examination of the use of the PoC in the scientific literature and health policy is relevant. A preliminary search of PubMed, Embase, and OpenAlex was conducted and no current or underway systematic reviews or scoping reviews on the topic were identified. 
-
-{{< pagebreak >}}
+Despite its use in worker compensation schemes, there have been criticisms to the PoC, such as it not accounting for accelerated outcome occurrence (i.e., the disease would have occurred at a later time without the exposure) or the modifications in PoC due to varying background risk.[@GreenlandPoC1999; @Greenland2015] Thus, further examination of the use of the PoC in the scientific literature, alternatives, and applications in health policy is relevant. A preliminary search of PubMed, Embase, and OpenAlex was conducted and no current or underway systematic or scoping reviews of the application of the PoC for the financial compensation of lung cancer cases were found, except for one review which does not fully report the methods to allow to judge if a systematic approach was used.[@Kim2018]
 
 # Research Questions
 
 ### Primary Research Question:
 
-How has the Probability of Causation (PoC) principle been applied to evaluate the contribution of occupational exposures to lung cancer in worker populations?
+How has the Probability of Causation (PoC) calculation been applied to evaluate the contribution of occupational exposures to lung cancer in worker populations and what alternatives are there to the PoC?
 
 ### Secondary Research Questions:
 
-1. **Study Design:**  
-   What are the study designs employed in lung cancer research that utilize the PoC principle?
+1.  **Study Design:**\
+    What are the study designs employed in lung cancer research that utilize the PoC?
 
-2. **Outcomes:**  
-   What types of outcomes are assessed using the PoC in lung cancer studies?
+2.  **Outcomes:**\
+    What types of outcomes and assessment methods are used for the PoC in lung cancer studies?
 
-3. **Exposures:**  
-   Which occupational exposures have been examined in lung cancer studies applying the PoC principle?
+3.  **Exposures:**\
+    Which occupational exposures have been examined in lung cancer studies applying the PoC?
 
-4. **Population:**  
-   In which worker populations has the PoC been applied to study lung cancer?
+4.  **Population:**\
+    In which worker populations has the PoC been applied to study lung cancer?
 
-5. **Causal Assumptions:**  
-   What causal assumptions underlie the models used to apply the PoC in lung cancer research?
+5.  **Causal Assumptions:**\
+    What causal assumptions underlie the models used to apply the PoC in lung cancer research?
 
-6. **MModelling Approaches:**  
-   What variations in mathematical formulas and modeling approaches have been used to calculate the PoC in lung cancer studies?
+6.  **Uncertainties:**\
+    What sources of uncertainty are described when applying the PoC?
 
-7. **Policy and Legal Frameworks:**  
-   How has the Probability of Causation principle been integrated into policy or legal frameworks for financial compensation of lung cancer cases?
-
-8. **Alternatives:**  
-   What alternative approaches or methodologies have been proposed or used in place of the Probability of Causation to assess the contribution of occupational exposures to lung cancer?
+7.  **Alternatives:**\
+    What methodological improvements could be used to estimate the PoC or what alternatives can be used to assess the contribution of occupational exposures to lung cancer in worker compensation schemes?
 
 {{< pagebreak >}}
 
@@ -153,27 +125,25 @@ Written according to the (Participants, Concept, Context) PCC framework.
 
 #### Population
 
-Adults of both sexes with a relevant occupational exposures relevant to workplace environments. 
+Adults of both sexes at risk of developing lung cancer due to an occupational exposure.
 
 #### Concept
 
-Studies that involve the development, application, or evaluation of the Probability of Causation (PoC) principle using an exposure-response function to estimate thresholds where the likelihood of a health outcome being caused by a single exposure is greater than 0.5.
+The development, application, or evaluation of the Probability of Causation (PoC) using an exposure-response function to estimate the probability that a health outcome was caused by a chemical, physical, or biological workplace exposure.
 
 #### Context
 
-The main outcome of interest is lung cancer. Depending on the volume and scope of the literature, the inclusion criteria may be broadened to include (1) other cancers with multi-causal etiologies or (2) other diseases where the PoC is applied to assess occupational exposures.
+Lung cancer and histological subtypes.
 
 # Types of sources
 
-### First Stage (Scientific Literature)
+This scoping review will include studies that report the probability of causation (PoC) of lung cancer due to at least one occupational exposure, with the condition that values are calculated using a continuous exposure-response curve to determine the probability that the outcome was due to the workplace exposure. Experimental (randomized controlled trials and non-randomized studies) and observational studies including prospective and retrospective cohort studies, case-control studies, analytical cross-sectional studies, and ecological studies will be considered. Systematic reviews using meta-regression to determine the exposure-response curve and calculating the PoC will also be included. Case series applying previously derived PoC functions will be included. Other types of studies, such as case reports, narrative reviews, editorials, commentaries, conference abstracts, among others will be excluded from data charting. Both peer-reviewed studies and pre-prints will be considered for inclusion. In the case of the inclusion of a pre-print, a clear mention of the non-peer reviewed status will be made.
 
-This scoping review will consider both experimental (randomized controlled trials and non-randomized studies) and observational studies including prospective and retrospective cohort studies, case-control studies, analytical cross-sectional studies, and ecological studies. Systematic reviews reporting on the application of the PoC principle from an exposure-response curve will also be included. Other types of studies, such as case reports, case series, narrative reviews, editorials, commentaries, among others will be excluded from data charting, but may be used to inform the discussion. Both peer-reviewed and non-peer reviewed literature (i.e., pre-prints) will be considered for inclusion.
+For the alternatives of the PoC, studies identified in the first stage of the review will undergo backward and forward citation snowball review to identify potential alternatives. Additional methodological improvements and alternatives to the PoC considered relevant by the research team will be included in the review.
 
-### Second Stage (Public Policy Documents)
+Both the ascendancy approach and descendancy approach will be employed to find other relevant references. The descendancy algorithm will be implemented in OpenAlex through the openalexr package.
 
-Academic publications and the grey literature will be searched for descriptions of the use of the PoC for the financial compensation of workers. Diverse documents ranging from public policy documents, editorials, opinion papers, among others will be included if they describe case uses of the PoC for the financial compensation of workers who develop lung cancer. Both peer-reviewed and non-peer reviewed literature will be considered for inclusion. 
-
-A different search strategy may be defined for this second stage of the review. Details will be provided in a subsequent protocol update. 
+During the pilot phase of this scoping review, other types of articles were considered (case reports, narrative reviews, editorials, commentaries), but none were labelled as potentially relevant. Therefore, these will be excluded as they significantly delayed the progress of the review. Lastly, the research question has been narrowed to studies with lung cancer as the outcome because the searches retrieved a manageable number of records, compared to a broader search strategy including all types of cancer. These points are documented in more detailed in **appendixes 1 and 2**.
 
 {{< pagebreak >}}
 
@@ -181,19 +151,171 @@ A different search strategy may be defined for this second stage of the review. 
 
 ## Search strategy
 
-The search strategy aims to find published studies in academic databases with large coverage of the medical literature. For the second stage of the review, interest will be on both academic databases and the grey literature, including public policy documents. The text words contained in the titles and abstracts of relevant articles, and the index terms used to describe the articles were used to develop a full search strategy are provided in Appendix 1 and Appendix 2. The search strategy, including all identified keywords and index terms will be adapted for each included information source.
+### Databases
+
+The search strategy aims to find published studies in two academic databases with large coverage of the medical literature (PubMed and Embase), plus one database with a broad coverage of the grey literature (OpenAlex). Some of the databases that will be covered by the review are: MEDLINE (PubMed, Embase, OpenAlex), PubMed Central (PubMed), Embase (Embase), Crossref (OpenAlex), DOAJ (OpenAlex), preprint repositories (OpenAlex and PubMed), Zenodo (OpenAlex), and Internet Archive (OpenAlex).
+
+### Terms and queries
+
+The text words contained in the titles and abstracts of relevant articles, and the index terms used to describe the articles were used to develop a full search strategy during the pilot search and screening phases. The studies recovered were used to refine the search strategy and to identify additional relevant keywords through litsearchr.[@Grames2019] The full list of terms according to the PCC framework is as follows (shown here according to PubMed syntax only for simplicity):
+
+### **Population**
+
+**Mesh Terms / Mesh Major Topic**
+
+-   “Workplace”\[MeSH Terms\]
+-   “Working Conditions”\[MeSH Terms\]
+-   “Employment”\[MeSH Terms\]
+-   “Occupational Health”\[MeSH Terms\]
+-   “Occupational Diseases”\[MeSH Terms\]
+-   “Occupational Exposure”\[MeSH Terms\]
+-   “Workers compensation”\[MeSH Terms\]
+
+**Entry Terms**
+
+-   Work\*
+-   Occupat\*
+-   Manufactur\*
+-   Job exposure matrix
+-   JEM
+
+### **Concept**
+
+**Entry Terms**
+
+-   “Probability of causation”
+-   “Probabilistic causation”
+-   “Balance of probabilities”
+-   “Aetiological fraction”
+-   “Etiologic fraction”
+-   “Causal fraction”
+-   “Attributable risk”
+-   “Attributable proportion”
+-   “Attributable fraction”
+-   “Proportional liability”
+-   “Causation”
+-   “Risk model”
+-   “Stochastic model”
+-   “Work attribution”
+-   “Assigned share”
+-   "Causal exposure response"
+-   "Relative contribution"
+-   “Causal discovery”
+
+### **Context**
+
+**Mesh Terms / Mesh Major Topic**
+
+-   “Carcinogens”\[MeSH\]
+-   “Neoplasms”\[MeSH\]
+-   “Neoplasms, Squamous Cell” \[MeSH\]
+-   “Adenocarcinoma of Lung”\[MeSH\]
+-   “Small Cell Lung Carcinoma”\[MeSH\]
+-   “Carcinoma, Non-Small-Cell Lung”\[MeSH\]
+
+**Entry Terms**
+
+-   Neoplasms
+-   Cancer
+-   Carcinogens
+-   Malignant
+
+### **Additional Context**
+
+**Mesh Terms / Mesh Major Topic**
+
+-   “Lung”\[Mesh\]
+-   “Lung Diseases”\[Mesh\]
+-   “Lung Neoplasms”\[MeSH Major Topic\]
+-   “Adenocarcinoma of Lung”\[MeSH\]
+-   “Small Cell Lung Carcinoma”\[MeSH\]
+-   “Carcinoma, Non-Small-Cell Lung”\[MeSH\]
+
+**Entry Terms**
+
+-   Lung
+-   Lung Diseases
+-   Lung Cancer
+-   Pulmonary
+-   Bronchial
+-   Tracheal
+
+### **Filters (NOT)**
+
+-   letter \[Publication Type\]23.82
+-   comment \[Publication Type\]
+-   news \[Publication Type\]
+-   case report \[Publication Type\]
+-   congress \[Publication Type\]
+-   clinical conference \[Publication Type\]
+
+PubMed query:
+
+```{r}
+#| output: asis
+
+'(((("Probability of causation" OR "Probabilistic causation" OR "Balance of probabilities" OR "Aetiological fraction" OR "Etiologic fraction" OR "Causal fraction" OR "Attributable risk" OR "Attributable proportion" OR "Attributable fraction" OR "Proportional liability" OR "Causation" OR "Risk model" OR "Stochastic model" OR "Work attribution" OR "Assigned share" OR "Causal exposure response" OR "Relative contribution" OR "Causal discovery")) AND (("Workplace"[MeSH Terms] OR "Working Conditions"[MeSH Terms] OR "Employment"[MeSH Terms] OR "Occupational Health"[MeSH Terms] OR "Occupational Diseases"[MeSH Terms] OR "Occupational Exposure"[MeSH Terms] OR "Workers Compensation"[MeSH Terms] OR work* OR occupat* OR manufactur* OR "Job exposure matrix" OR "JEM"))) AND (("Carcinogens"[MeSH] OR "Neoplasms"[MeSH] OR "Neoplasms, Squamous Cell"[MeSH] OR "Adenocarcinoma of Lung"[MeSH] OR "Small Cell Lung Carcinoma"[MeSH] OR "Carcinoma, Non-Small-Cell Lung"[MeSH] OR neoplasms OR cancer* OR carcinogens OR malignant)) AND (("Lung"[MeSH] OR "Lung Diseases"[MeSH] OR "Lung Neoplasms"[MeSH Major Topic] OR "Adenocarcinoma of Lung"[MeSH] OR "Small Cell Lung Carcinoma"[MeSH] OR "Carcinoma, Non-Small-Cell Lung"[MeSH] OR lung OR "Lung Diseases" OR "Lung Cancer" OR pulmonar* OR bronch* OR trache*))) NOT (letter[Publication Type] OR editorial[Publication Type] OR comment[Publication Type] OR news[Publication Type] OR "case reports"[Publication Type] OR congress[Publication Type] OR "clinical conference"[Publication Type])'
+```
+
+Embase query:
+
+```{r}
+#| output: asis
+
+"(((('probability of causation' OR 'probabilistic causation' OR 'balance of probabilities' OR 'aetiological fraction' OR 'etiologic fraction' OR 'causal fraction' OR 'attributable risk' OR 'attributable proportion' OR 'attributable fraction' OR 'proportional liability' OR 'causation' OR 'risk model' OR 'stochastic model' OR 'work attribution' OR 'assigned share' OR 'causal exposure response' OR 'relative contribution' OR 'causal discovery')) AND (('workplace'/exp OR 'work environment'/exp OR 'employment'/exp OR 'occupational health'/exp OR 'occupational disease'/exp OR 'occupational exposure'/exp OR 'workman compensation'/exp OR 'work*' OR 'occupat*' OR 'manufactur*' OR 'job exposure matrix' OR 'jem'))) AND (('carcinogen'/exp OR 'neoplasm'/exp OR 'squamous cell carcinoma'/exp OR 'lung adenocarcinoma'/exp OR 'small cell lung cancer'/exp OR 'non small cell lung cancer'/exp OR 'neoplasms' OR 'cancer*' OR 'carcinogens' OR 'malignant')) AND (('lung'/exp OR 'lung disease'/exp OR 'lung tumor'/exp/mj OR 'lung adenocarcinoma'/exp OR 'small cell lung cancer'/exp OR 'non small cell lung cancer'/exp OR 'lung' OR 'lung diseases' OR 'lung cancer' OR 'pulmonar*' OR 'bronch*' OR 'trache*'))) NOT ('letter':it OR 'editorial':it OR 'comment':it OR 'note':it OR 'news':it OR 'case reports':it OR 'conference abstract':it OR 'conference paper':it OR 'clinical trial':it)"
+```
+
+OpenAlex
+
+```{r}
+#| output: asis
+
+'https://api.openalex.org/works?filter=title_and_abstract.search:((("workplace" OR "working conditions" OR "employment" OR "occupational" OR "occupation" OR "workers compensation" OR "work" OR "manufacture" OR "job exposure matrix" OR "JEM") AND ("Probability of causation" OR "Probabilistic causation" OR "Balance of probabilities" OR "Aetiological fraction" OR "Etiologic fraction" OR "Causal fraction" OR "Attributable risk" OR "Attributable proportion" OR "Attributable fraction" OR "Proportional liability" OR "Causation" OR "Risk model" OR "Stochastic model" OR "Work attribution" OR "Assigned share" OR "Causal exposure response" OR "Relative contribution" OR "Causal discovery") AND ("carcinogen" OR "neoplasms" OR "squamous cell carcinoma" OR "adenocarcinoma of lung" OR "lung adenocarcinoma" OR "small cell lung carcinoma" OR "non‑small‑cell lung carcinoma" OR "cancer" OR "malignant") AND ("lung" OR "lungs" OR "pulmonary" OR "bronchopulmonary" OR "bronchus" OR "bronchi" OR "trachea" OR "adenocarcinoma of lung" OR "lung adenocarcinoma" OR "small cell lung carcinoma" OR "non‑small‑cell lung carcinoma")))'
+```
+
+### Language restrictions
 
 Studies will not be excluded due to language restrictions in the search strategy to avoid language publication bias.[@pieper2021]
 
-[Section in progress...]
+### Deduplication
+
+The Automated Systematic Search Deduplicator (ASySD) will be used in R.[@ASySD2023] Manual deduplication of remaining potential duplicates will be carried out in excel by first examining the repeated DOIs and then comparing the records. Empty abstract fields were searched in Google Scholar, WorldCat, and journal websites and added to the records when found. Reasons for manual removal of duplicates will documented and reported.
 
 ## Screening
 
-Title and abstracts that are not in the English, Spanish, Dutch, or German (languages spoken at highly skilled level by researchers involved in the review) will be translated to English using Google Translate. Agreement in systematic reviews using translations from the more recent Google Translate models has been reported to be higher than 80%, with inter-rater interpretations being a greater source of disagreement than inexact translations.[@Jackson2019] Potential inaccurate translations are not considered relevant for the purposes of this scoping review since the objective is to map existing literature and policy resources. Thus, attaining a large coverage of regions and languages is of higher relevance than highly precise data extraction.
+Title and abstracts that are not in the English, Spanish, Dutch, or German (languages spoken at highly skilled level by researchers involved in the review) will be translated to English using Google Translate. Agreement in systematic reviews using translations from the more recent Google Translate models has been reported to be higher than 80%, with inter-rater interpretations being a greater source of disagreement than inexact translations.[@Jackson2019] Potential inaccurate translations are not considered relevant for the purposes of this scoping review since the objective is to describe the applications of a the concept of the PoC and potential alternatives. Thus, attaining a large coverage of regions and languages is of higher relevance than highly precise data extraction.
 
-The machine learning asisted learning tool ASReview will be used to screen title and abstracts.[@Vandeschoot2021]
+The machine learning assisted learning tool ASReview[@Vandeschoot2021] v.1.6.3 was used in the pilot screening stage, and v.2.0.2 or later[@debruin2025] will be used for screening. The SAFE procedure will be followed as the stopping heuristic for screening.[@Boetje2024] A full description of the screening procedures is provided in **Appendix 3**.
 
-[Section in progress...]
+## Contacting Authors
+
+No procedures for contacting authors are being considered at this moment because this is a scoping review with no plans to perform a meta-analysis.
+
+## Data extraction
+
+From each included source, the following entities will be extracted: descriptions of the study design, sample size, worker population characteristics, exposure types, and outcome definitions; exposure assessment methods and sources of exposure-response functions; statistical measures used for estimating excess risk and Probability of Causation (PoC), including any identified exposure thresholds for PoC ≥ 0.5; model assumptions and background risk estimates; descriptions and sources of uncertainty; and qualitative summaries of methodological features such as adjustment variables and analytical models. In addition, relevant metadata including authorship, publication year, and institutional affiliations will be recorded. Extraction instructions are provided in **Appendix 4**.
+
+### Extraction stages
+
+Pilot extraction (already conducted) and final extraction (yet to be conducted).
+
+## Synthesis Plan
+
+Descriptive analyses will be conducted to characterize the included studies in terms of their publication timeline and geographical distribution. The year of publication will be grouped by decade (1990–1999, 2000–2009, 2010–2019, and 2020–2025) and summarized in a frequency table and visualized with a bar chart. To explore the geographical distribution, the countries of the study populations will be extracted and visualized using a world map. This map will display the number of studies per country.
+
+Study designs will be categorized as cohort studies, case-control studies, or case series, and their frequency will be summarized in a table. The specific design of each study will be cross-referenced with the exposures and populations studied to explore patterns in methodological approaches.
+
+Occupational exposures will be classified by type (i.e., radiation, asbestos, coal tar pitch volatiles) and by the method used for exposure assessment (e.g., job-exposure matrices, direct measurements, etc). Outcome measures will be categorized according to whether they refer to lung cancer as a single entity or to specific subtypes. The methods used to ascertain outcomes (i.e., cancer registries, health records, panel assessment) will also be documented.
+
+The calculation of the PoC will be described by identifying whether a threshold (e.g., PoC ≥ 0.5) was used, and whether confidence intervals were employed, as well as the assumptions and uncertainties described in each study. Causal assumptions, such as the assumed shape of the exposure-response curve, latency periods, or confounding control, will be reported. Sources of uncertainty described by authors will be grouped into major categories (i.e., statistical uncertainty, exposure misclassification, among others).
+
+The review will identify methodological alternatives and improvements proposed in the literature. This may include Bayesian modeling approaches, attributable fraction estimates, mechanistic modeling strategies, or alternative outcomes such as loss of life expectancy, quality of life, among others. Where available, critiques of PoC and suggested alternatives for use in compensation schemes or legal settings will be summarized.
+
+All analyses will be conducted in R (version 4.4.0), using the tidyverse suite for data wrangling and visualization, gt for formatted summary tables, and the maps package for generating geographical plots.
+
+## Software
+
+Open source documentation for all stages of the review will be conducted within an R project using quarto markdown (.qmd) documents in RStudio (v.2024.04.0) in Windows 11. R (v.4.4.0) packages will be used to refine the search strategy (litsearchr v.0.4.0) and deduplication with the Automated Systematic Search Deduplicator (ASySD v.0.4.3).[@ASySD2023] The machine learning assisted learning tool ASReview v.1.6.3[@Vandeschoot2021] will be used in the pilot screening stage, while ASReview v.2.0.2[@debruin2025] will be used for the final study screening phase.
 
 {{< pagebreak >}}
 
@@ -212,7 +334,6 @@ An exploratory search of the literature was conducted in PubMed, Embase, OpenAle
 library(dplyr)
 library(gt)
 ```
-
 
 ```{r}
 summary_searches <- data.frame(
@@ -234,43 +355,6 @@ summary_searches %>%
 The following terms were used for the search strategies and adapted for each database:
 
 ### **Population**
-
-**Mesh Terms / Mesh Major Topic**
-
--   "Workplace"\[MeSH Terms\]
--   "Working Conditions"\[MeSH Terms\]
--   "Employment"\[MeSH Terms\]
--   "Occupational Exposure"\[MeSH Terms\]
--   "Occupational Diseases"\[MeSH Terms\]
--   "occupational exposure/analysis"\[MeSH Major Topic\]
--   "occupational diseases/chemically induced"\[MeSH Terms\]
--   "occupational diseases/epidemiology"\[MeSH Terms\]
--   "occupational exposure/adverse effects"\[MeSH Major Topic\]
--   "workers compensation/economics"\[MeSH Major Topic\]
--   "workers compensation/statistics and numerical data"\[MeSH Major Topic\]
--   "workers compensation"\[MeSH Terms\]
-
-### **Concept**
-
-**Entry Terms**
-
--   Probability of causation
--   Probabilistic causation
--   Balance of probabilities
--   Aetiological fraction
--   Etiologic fraction
--   Causal fraction
--   Attributable risk
--   Attributable proportion
--   Attributable fraction
--   Proportional liability
--   Causation
--   Risk model
--   Stochastic model
--   Work attribution
--   Assigned share
-
-### **Context**
 
 **Entry Terms**
 
@@ -301,6 +385,47 @@ The following terms were used for the search strategies and adapted for each dat
 -   "Lung"\[Mesh\]
 -   "Lung Diseases"\[Mesh\]
 -   "Lung Neoplasms"\[MeSH Major Topic\]
+
+### **Concept**
+
+**Entry Terms**
+
+-   Probability of causation
+-   Probabilistic causation
+-   Balance of probabilities
+-   Assigned share
+-   Aetiological fraction
+-   Etiologic fraction
+-   Causal fraction
+-   Attributable risk
+-   Attributable proportion
+-   Attributable fraction
+-   Proportional liability
+-   Causation
+-   Risk model
+-   Stochastic model
+-   Work attribution
+-   Causal exposure response
+-   Dose response
+-   Excess risk
+-   Excess relative risk - to be included after pilot
+
+### **Context**
+
+**Mesh Terms / Mesh Major Topic**
+
+-   "Workplace"\[MeSH Terms\]
+-   "Working Conditions"\[MeSH Terms\]
+-   "Employment"\[MeSH Terms\]
+-   "Occupational Exposure"\[MeSH Terms\]
+-   "Occupational Diseases"\[MeSH Terms\]
+-   "occupational exposure/analysis"\[MeSH Major Topic\]
+-   "occupational diseases/chemically induced"\[MeSH Terms\]
+-   "occupational diseases/epidemiology"\[MeSH Terms\]
+-   "occupational exposure/adverse effects"\[MeSH Major Topic\]
+-   "workers compensation/economics"\[MeSH Major Topic\]
+-   "workers compensation/statistics and numerical data"\[MeSH Major Topic\]
+-   "workers compensation"\[MeSH Terms\]
 
 {{< pagebreak >}}
 
@@ -348,8 +473,6 @@ Restricting to last 10 years
 
 Number of records (Last 10 years): 51
 
-{{< pagebreak >}}
-
 #### Embase
 
 ```         
@@ -366,8 +489,6 @@ Restricting to last 10 years
 
 Number of records (last 10 years): 96
 
-{{< pagebreak >}}
-
 #### OpenAlex
 
 ```         
@@ -382,8 +503,6 @@ Number of records (full-text): 11290
 
 Number of records (full-text, last 10 years): 3951
 
-{{< pagebreak >}}
-
 #### Policy Commons
 
 Restricting to lung cancer only
@@ -395,8 +514,6 @@ Restricting to lung cancer only
 Number of records: 1867
 
 Number of records (last 10 years): 974
-
-{{< pagebreak >}}
 
 #### Overton
 
@@ -451,8 +568,6 @@ Restricting to last 10 years
 
 Number of records (last 10 years): 120
 
-{{< pagebreak >}}
-
 #### Embase
 
 ```         
@@ -469,8 +584,6 @@ Restricting to last 10 years
 
 Number of records: 209
 
-{{< pagebreak >}}
-
 #### OpenAlex
 
 ```         
@@ -485,8 +598,6 @@ Number of records (full-text): 22992
 
 Number of records (full-text, last 10 years): 8835
 
-{{< pagebreak >}}
-
 #### Policy Commons
 
 ```         
@@ -496,8 +607,6 @@ Number of records (full-text, last 10 years): 8835
 Number of records: 3971
 
 Number of records (last 10 years): 2155
-
-{{< pagebreak >}}
 
 #### Overton
 
@@ -514,3 +623,83 @@ Number of records: 13130
 Number of records (last 10 years): 8018
 
 {{< pagebreak >}}
+
+# Appendix 3: Screening Procedures
+
+## Full-length review screening
+
+Three percent of the records were randomly screened to determine the number of relevant records expected in the whole dataset, according to the SAFE procedure. The size of the training set ( $t$ ) is:
+
+$$ t = 1129 \times 0.03 $$
+
+Thus, **34 records** were randomly reviewed.
+
+There was 1 relevant record ($RR_t$) found. Thus, the number of relevant records ($RR_T$) expected in the whole dataset ($T$) is:
+
+$$ RR_T = \frac{RR_t}{t} \times T $$
+
+A total of **34 relevant records** are expected.
+
+According to the SAFE procedure, active learning with an initial lightweight model (ELAS u4, default configuration) will be used according to the following stopping heuristics:
+
+-   At least twice the ($RR_T$) should be screened: **68 records**
+-   A minimum of 10% of the records should be screened: **113 records**
+-   No extra relevant records have been identified in the last 25 records.
+
+When these criteria are met, the model will be changed to the ELAS h3 deep learning model (default configuration), to allow the identification of more complex semantic context that can uncover difficult to find records.
+
+The stopping heuristic will be:
+
+-   No extra relevant records have been identified in the last 25 records.
+
+## Pilot Screening
+
+For the pilot screening phase, 5% of the records from the lung cancer search were be randomly screened to determine the number of relevant records expected in the whole dataset, according to the SAFE procedure. The size of the training set ( $t$ ) is:
+
+$$ t = 453 \times 0.05 $$
+
+Thus, **23 records** were randomly reviewed.
+
+There was 1 relevant record ($RR_t$) found. Thus, the number of relevant records ($RR_T$) expected in the whole dataset ($T$) is:
+
+$$ RR_T = \frac{RR_t}{t} \times T $$
+
+A total of **20 relevant records** were expected, but only 10 were selected chosen for pilot data extraction. These records were later incorporated as prior knowledge in the full dataset used in the scoping review.
+
+{{< pagebreak >}}
+
+# Appendix 4. Extraction Instructions
+
+As part of the data extraction phase of this scoping review, a structured dataset was generated based. Reviewers are requested to verify, annotate, and refine entries for each study beginning from the column labeled type, and extending across all subsequent variables in the dataset. Stated differently, colored columns should not be modified, except for reclassification of the "included" columns as explained below.
+
+-   Included: The included variable indicates whether a study has met all eligibility criteria for inclusion in the final data synthesis. If, upon full-text review, a study is found not to satisfy the pre-specified selection criteria, screeners may manually update this column to reflect its exclusion.
+
+-   Study Type: Register the study design classification (i.e., "cohort", "case-control", "case-series").
+
+-   Exposure: Confirm the primary occupational exposure(s) evaluated in the study (i.e., "radiation", "asbestos", "coal tar pitch volatiles"). If multiple exposures are discussed, retain only those for whic PoC was estimated.
+
+-   Worker Population: Assess the description of the study population, including industry or occupational group (i.e., "uranium miners", "nuclear plant workers", "aluminum smelter workers"). This should reflect the primary occupational group under investigation for PoC estimation.
+
+-   Outcome: Review the reported health outcome(s) for which PoC was calculated. Note whether lung cancer was assessed as a single entity or by histologic subtype.
+
+-   Exposure Assessment: Confirm the method by which exposure was estimated or reconstructed. Common methods include job-exposure matrices (JEMs), biomonitoring, registry data, or self-reported histories.
+
+-   Source of Exposure-Response Relationship: Record the population or study from which the exposure-response function was derived.
+
+-   Measure for Excess Risk: Identify the statistical measure used to estimate excess relative risk (ERR) or equivalent (i.e., "odds ratio", "incidence rate ratio").
+
+-   Threshold for PoC ≥ 0.5: Indicate whether a quantitative threshold of exposure was identified at which the PoC is greater than or equal to 0.5.
+
+-   Exposure Threshold Level: Where applicable, record the specific exposure level (i.e., "4.3 fiber-years", "100 µg/m³-years benzo\[a\]pyrene") associated with PoC ≥ 0.5.
+
+-   Uncertainty Characterization: Summarize the types of uncertainty discussed in the study, such as statistical error, measurement error, population transferability, or model mis-specification.
+
+-   Uncertainty Description: Where provided, include more detailed explanations of uncertainty, such as the use of upper-bound estimates, Monte Carlo simulation, or Bayesian interval estimation.
+
+-   Background Risk: Clarify the assumed or modeled background risk of lung cancer in the reference (non-exposed) population. This may include population incidence rates, comparator worker groups, or transferred baseline risk from external cohorts.
+
+-   Model Assumptions: Identify and list the model assumptions explicitly stated in the study, particularly related to confounding adjustment (i.e., age, sex, smoking), latency, or dose-response form.
+
+-   Comments: This column should be used to record any clarifications, methodological notes, or supplementary information not captured in the other variables. For example, mention if a study includes additional datasets, software tools used for PoC implementation, or correspondence with authors.
+
+For transparency and reproducibility, please maintain a log of any substantive reclassifications made during your review of the dataset.

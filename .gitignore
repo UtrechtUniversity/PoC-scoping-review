@@ -2,6 +2,7 @@
 /data/temp
 /data/processed
 /data/raw
+/data/studies
 
 # History files
 .Rhistory
@@ -13,6 +14,7 @@
 
 # User-specific files
 .Ruserdata
+R/scripts/options_openAlex.R
 
 # Example code in package build process
 *-Ex.R
@@ -45,7 +47,7 @@ vignettes/*.pdf
 .Renviron
 
 # manuscript in process 
-# docs/
+docs/manuscript
 
 # translation temp files
 po/*~

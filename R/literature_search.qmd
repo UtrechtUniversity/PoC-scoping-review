@@ -89,79 +89,14 @@ session
 
 This review requires that a rapid overview of studies on the probability of causation (PoC) is obtained in a short time, reason why automated workflows will offer an advantage. The OpenAlex API is a tool that can be used to search for scientific articles and retrieve metadata from them. This tool will be used to search for articles on the PoC approach for lung cancer.
 
-The search will be conducted using the following keywords, based on the (Participants, Concept, Context) PCC framework:
+The search will be conducted using the following keywords, based on the (Participants, Concept, Context) PCC research question, as detailed in the full protocol. 
 
-#### Population
-
-Adults of both sexes with a relevant exposure at their workplace environment.
-
--   Workplace
-
--   Working conditions
-
--   Occupational
-
-#### Concept
-
-The application of the probability of causation principle.
-
--   Probability of causation
-
--   Probabilistic causation
-
--   Balance of probabilities
-
--   Aetiological fraction
-
--   Etiologic fraction
-
--   Causal fraction
-
--   Attributable risk
-
--   Attributable proportion
-
--   Attributable fraction
-
--   Proportional liability
-
--   Causation
-
--   Risk model
-
--   Stochastic model
-
--   Work attribution
-
--   Assigned share
-
-#### Context
-
-The main outcome of interest is lung cancer. The search strategy will be broadened to include other types of cancer and as a third step, to include any multi-causal disease.
-
--   Lung cancer
-
--   Lung malignant neoplasm
-
--   Lung tumor
-
--   Lung Carcinogen
-
--   Mesothelioma
-
--   Multicausal/Multietiological disease
-
--   Multicausal/Multietiological health effects
-
-{{< pagebreak >}}
 
 # PubMed search 
 
-## Results for any type of cancer 
-
 ```{r}
 #| echo: true  
-query <- '((("Workplace*"[tiab] OR "Working Conditions"[tiab] OR "Employment"[tiab] OR "Occupational Exposure"[tiab] OR "Occupational Diseases"[tiab] OR "occupational exposure/analysis"[tiab] OR "occupational diseases/chemically induced"[tiab] OR "occupational diseases/epidemiology"[tiab] OR "occupational exposure/adverse effects"[tiab] OR "Workplace"[MeSH Terms] OR "Working Conditions"[MeSH Terms] OR "Employment"[MeSH Terms] OR "Occupational Exposure"[MeSH Terms] OR "Occupational Diseases"[MeSH Terms] OR "occupational exposure/analysis"[MeSH Major Topic] OR "occupational diseases/chemically induced"[MeSH Terms] OR "occupational diseases/epidemiology"[MeSH Terms] OR "occupational exposure/adverse effects"[MeSH Major Topic] OR "workers compensation/economics"[MeSH Major Topic] OR "workers compensation/statistics and numerical data"[MeSH Major Topic] OR "workers compensation"[MeSH Terms] OR "workers compensation"[tiab])) AND (("Probability of causation"[tiab] OR "Probabilistic causation"[tiab] OR "Balance of probabilities"[tiab] OR "Aetiological fraction"[tiab] OR "Etiologic fraction"[tiab] OR "Causal fraction"[tiab] OR "Attributable risk"[tiab] OR "Attributable proportion"[tiab] OR "Attributable fraction"[tiab] OR "Proportional liability"[tiab] OR "Causation"[tiab] OR "Risk model"[tiab] OR "Stochastic model"[tiab] OR "Work attribution"[tiab] OR "Assigned share"[tiab]))) AND (("neoplasms"[tiab] OR "Cancer"[tiab] OR "Carcinogens"[tiab] OR "neoplasms/epidemiology"[tiab] OR "neoplasms/etiology"[tiab] OR "neoplasms/mortality"[tiab] OR "Carcinogens"[MeSH Major Topic] OR "neoplasms/epidemiology"[MeSH Major Topic] OR "neoplasms/etiology"[MeSH Terms] OR "neoplasms/mortality"[MeSH Major Topic]))'
+query <- '(((("Probability of causation" OR "Probabilistic causation" OR "Balance of probabilities" OR "Aetiological fraction" OR "Etiologic fraction" OR "Causal fraction" OR "Attributable risk" OR "Attributable proportion" OR "Attributable fraction" OR "Proportional liability" OR "Causation" OR "Risk model" OR "Stochastic model" OR "Work attribution" OR "Assigned share" OR "Causal exposure response" OR "Relative contribution" OR "Causal discovery")) AND (("Workplace"[MeSH Terms] OR "Working Conditions"[MeSH Terms] OR "Employment"[MeSH Terms] OR "Occupational Health"[MeSH Terms] OR "Occupational Diseases"[MeSH Terms] OR "Occupational Exposure"[MeSH Terms] OR "Workers Compensation"[MeSH Terms] OR work* OR occupat* OR manufactur* OR "Job exposure matrix" OR "JEM"))) AND (("Carcinogens"[MeSH] OR "Neoplasms"[MeSH] OR "Neoplasms, Squamous Cell"[MeSH] OR "Adenocarcinoma of Lung"[MeSH] OR "Small Cell Lung Carcinoma"[MeSH] OR "Carcinoma, Non-Small-Cell Lung"[MeSH] OR neoplasms OR cancer* OR carcinogens OR malignant)) AND (("Lung"[MeSH] OR "Lung Diseases"[MeSH] OR "Lung Neoplasms"[MeSH Major Topic] OR "Adenocarcinoma of Lung"[MeSH] OR "Small Cell Lung Carcinoma"[MeSH] OR "Carcinoma, Non-Small-Cell Lung"[MeSH] OR lung OR "Lung Diseases" OR "Lung Cancer" OR pulmonar* OR bronch* OR trache*))) NOT (letter[Publication Type] OR editorial[Publication Type] OR comment[Publication Type] OR news[Publication Type] OR "case reports"[Publication Type] OR congress[Publication Type] OR "clinical conference"[Publication Type])'
 ```
 
 
@@ -182,43 +117,7 @@ source("scripts/PubMed_search.R")
 
 ```{r}
 # Save to CSV
-write.csv(results, paste0(inputfolder,"/",lubridate::today(),"_PubMed_PoC_Cancer.csv"), row.names = FALSE)
-
-# Print summary
-cat("\nRetrieval complete.\n")
-cat("Total articles retrieved:", nrow(results), "\n")
-cat("Articles with abstracts:", sum(!is.na(results$abstract)), "\n")
-cat("Articles with DOIs:", sum(!is.na(results$doi)), "\n")
-```
-
-{{< pagebreak >}}
-
-## Lung Cancer 
-
-```{r}
-#| echo: true  
-query <- '(((("Workplace"[tiab] OR "Working Conditions"[tiab] OR "Employment"[tiab] OR "Occupational Exposure"[tiab] OR "Occupational Diseases"[tiab] OR "occupational exposure/analysis"[tiab] OR "occupational diseases/chemically induced"[tiab] OR "occupational diseases/epidemiology"[tiab] OR "occupational exposure/adverse effects"[tiab] OR "Workplace"[MeSH Terms] OR "Working Conditions"[MeSH Terms] OR "Employment"[MeSH Terms] OR "Occupational Exposure"[MeSH Terms] OR "Occupational Diseases"[MeSH Terms] OR "occupational exposure/analysis"[MeSH Major Topic] OR "occupational diseases/chemically induced"[MeSH Terms] OR "occupational diseases/epidemiology"[MeSH Terms] OR "occupational exposure/adverse effects"[MeSH Major Topic] OR "workers compensation/economics"[MeSH Major Topic] OR "workers compensation/statistics and numerical data"[MeSH Major Topic] OR "workers compensation"[MeSH Terms] OR "workers compensation"[tiab])) AND (("Probability of causation"[tiab] OR "Probabilistic causation"[tiab] OR "Balance of probabilities"[tiab] OR "Aetiological fraction"[tiab] OR "Etiologic fraction"[tiab] OR "Causal fraction"[tiab] OR "Attributable risk"[tiab] OR "Attributable proportion"[tiab] OR "Attributable fraction"[tiab] OR "Proportional liability"[tiab] OR "Causation"[tiab] OR "Risk model"[tiab] OR "Stochastic model"[tiab] OR "Work attribution"[tiab] OR "Assigned share"[tiab]))) AND (("neoplasms"[tiab] OR "Cancer"[tiab] OR "Carcinogens"[tiab] OR "neoplasms/epidemiology"[tiab] OR "neoplasms/etiology"[tiab] OR "neoplasms/mortality"[tiab] OR "Carcinogens"[MeSH Major Topic] OR "neoplasms/epidemiology"[MeSH Major Topic] OR "neoplasms/etiology"[MeSH Terms] OR "neoplasms/mortality"[MeSH Major Topic]))) AND (("Lung"[Mesh] OR "Lung Diseases"[Mesh] OR lung[tiab] OR lungs[tiab] OR pulmonar*[tiab] OR bronchop*[tiab] OR bronchu*[tiab] OR bronchi*[tiab] OR trache*[tiab]))'
-```
-
-
-```{r}
-# Search PubMed and get the count
-search_results <- entrez_search(db="pubmed", term=query, retmax=0)
-total_count <- search_results$count
-cat("Total articles to retrieve:", total_count, "\n")
-```
-
-
-```{r}
-#| include: false
-
-source("scripts/PubMed_search.R")
-```
-
-
-```{r}
-# Save to CSV
-write.csv(results, paste0(inputfolder,"/",lubridate::today(),"_PubMed_PoC_Lung_Cancer.csv"), row.names = FALSE)
+write.csv(results, paste0(inputfolder,"/PoC/",lubridate::today(),"_PubMed_PoC.csv"), row.names = FALSE)
 
 # Print summary
 cat("\nRetrieval complete.\n")
@@ -232,8 +131,12 @@ cat("Articles with DOIs:", sum(!is.na(results$doi)), "\n")
 # OpenAlex search
 
 ```{r}
-#| eval: false
-options(openalexR.mailto = "j.mancillagalindo@uu.nl")
+#| include: false
+
+# Set environment options for OpenAlex API requests. Script hidden due to 
+# personal data. This is not necessary to reproduce the findings. 
+# See documentation for relevant code: https://docs.ropensci.org/openalexR/
+source("scripts/options_openAlex.R")
 ```
 
 ```{r}
@@ -242,31 +145,46 @@ population_terms <- c(
   "workplace", 
   "working conditions", 
   "employment", 
-  "occupational exposure", 
-  "occupational diseases", 
-  "workers compensation"
+  "occupational",
+  "occupation",
+  "workers compensation", 
+  "work", 
+  "manufacture", 
+  "job exposure matrix", 
+  "JEM"
 )
+
 concept_terms <- c(
-  "probability of causation", 
-  "probabilistic causation", 
-  "balance of probabilities", 
-  "aetiological fraction", 
-  "etiologic fraction", 
-  "causal fraction", 
-  "attributable risk", 
-  "attributable proportion", 
-  "attributable fraction", 
-  "proportional liability", 
-  "causation", 
-  "risk model", 
-  "stochastic model", 
-  "work attribution", 
-  "assigned share"
+  "Probability of causation", 
+  "Probabilistic causation", 
+  "Balance of probabilities", 
+  "Aetiological fraction", 
+  "Etiologic fraction",
+  "Causal fraction",
+  "Attributable risk",
+  "Attributable proportion",
+  "Attributable fraction",
+  "Proportional liability",
+  "Causation",
+  "Risk model",
+  "Stochastic model",
+  "Work attribution",
+  "Assigned share", 
+  "Causal exposure response",
+  "Relative contribution",
+  "Causal discovery"
 )
+
 context_terms <- c(
-  "neoplasms", 
+  "carcinogen", 
+  "neoplasms",
+  "squamous cell carcinoma",
+  "adenocarcinoma of lung",
+  "lung adenocarcinoma",
+  "small cell lung carcinoma",
+  "non‑small‑cell lung carcinoma",
   "cancer", 
-  "carcinogens"
+  "malignant"
 )
 additional_context_terms <- c(
   "lung", 
@@ -275,7 +193,11 @@ additional_context_terms <- c(
   "bronchopulmonary", 
   "bronchus", 
   "bronchi", 
-  "trachea"
+  "trachea",
+  "adenocarcinoma of lung",
+  "lung adenocarcinoma",
+  "small cell lung carcinoma",
+  "non‑small‑cell lung carcinoma"
 )
 
 # Create quoted terms
@@ -285,9 +207,9 @@ context_quoted <- paste0('"', context_terms, '"')
 additional_context_quoted <- paste0('"', additional_context_terms, '"')
 ```
 
-### Lung cancer 
 
 ```{r}
+#| output: asis 
 # Create the search string
 search_string <- str_glue(
   "((({pop}) AND ({concept}) AND ({context}) AND ({add_context})))",
@@ -300,8 +222,28 @@ search_string <- str_glue(
 search_string
 ```
 
-Query String (Open Alex)
 ```{r}
+#| eval: false 
+
+# Following the oa_query |> oa_request |> oa2df workflow to retrieve search results
+oa_q <- oa_query(
+  entity = "works",
+  filter = c(title_and_abstract.search = search_string)
+)
+
+oa_json <- oa_request(oa_q)
+
+results_df <- oa2df(oa_json, entity = "works")
+
+saveRDS(
+  results_df, 
+  file = paste0(inputfolder, "/PoC/", lubridate::today(),"_OpenAlex.rds")
+)
+```
+
+```{r}
+# The prior query can be directly retrieved in raw format from a website as follows: 
+
 query_string <- str_glue(
   "https://api.openalex.org/works?filter=title_and_abstract.search:{search}",
   search = search_string
@@ -310,10 +252,21 @@ query_string <- str_glue(
 query_string
 ```
 
-Search in open Alex with duration 
+```{r}
+results_df <- readRDS(paste0(inputfolder, "/PoC/2025-05-14_OpenAlex.rds"))
+
+# Filter preprints and journal articles
+results_journal <- results_df %>% filter(type %in% c("preprint", "article")) %>% arrange(desc(relevance_score))
+```
+
+Out of the `r count(results_df)` items retrieved, only those that were journal articles or preprints were kept, resulting in a total of `r count(results_journal)` items. Of these, there is `r count(results_journal %>% filter(is_retracted == TRUE))` (doi: `r results_journal %>% filter(is_retracted == TRUE) %>% pull(doi)`) record that has retracted status and will thus be excluded. 
+
+### Broad OpenAlex search
+
+The prior algorithm searched for exact matches. Another feature in OpenAlex is to search with stemming, which is expected to produce a significantly larger number of results, but could also uncover difficult to find papers. The retrieved studies will be examined for exact key concept matches to enrich the original dataset. 
 
 ```{r}
-#| eval: false
+#| eval: true
 start_time <- Sys.time()
 
 results <- oa_fetch(
@@ -324,64 +277,98 @@ results <- oa_fetch(
 end_time <- Sys.time()
 search_duration <- difftime(end_time, start_time)
 search_duration
-```
 
-```{r}
 saveRDS(
   results, 
-  file = paste0(inputfolder, "/", lubridate::today(),"_OpenAlex_Lung_Cancer.rds")
+  file = paste0(inputfolder, "/PoC/", lubridate::today(),"_OpenAlex_complete.rds")
+)
+```
+
+```{r}
+results <- readRDS(paste0(inputfolder, "/PoC/2025-05-14_OpenAlex_complete.rds"))
+
+# Filter preprints and journal articles
+results_broad <- results %>% filter(type %in% c("preprint", "article")) %>% arrange(desc(relevance_score))
+
+# Retracted papers 
+retracted_id <- results_broad %>% filter(is_retracted == TRUE) %>% pull(doi)
+```
+
+```{r}
+
+retracted <- results_broad %>% filter(is_retracted == TRUE) %>% pull(doi)
+```
+
+Out of the `r count(results)` items retrieved, only those that were journal articles or preprints were kept, resulting in a total of `r count(results_broad)` items. Of these, there are `r length(retracted)`) retracted records that were excluded, resulting in `r count(results_broad) - length(retracted)`. 
+
+```{r}
+results_broad <- results_broad %>% filter(is_retracted == FALSE) 
+```
+
+A reduced set of studies with exact matches to the strongest related concepts to the PoC will be selected for manual review and manually added after deduplicating the results from the PubMed, Embase, and OpenAlex datasets. 
+
+```{r}
+results_manual <- results_broad %>%
+  filter(
+    str_detect(ab, regex(
+      "probability of causation|assigned share|probabilistic causation|balance of probabilities|proportional liability|work attribution", 
+      ignore_case = TRUE)
+      ) & 
+      !doi %in% results_journal$doi
+    ) 
+
+results_manual %>% 
+  mutate(label = case_when(
+    doi = 'https://doi.org/10.2307/2531765' ~ 'relevant',
+    doi = 'https://doi.org/10.1371/journal.pone.0096099' ~ 'relevant',
+    doi = 'https://doi.org/10.1002/sim.4780100113' ~ 'relevant',
+    doi = 'https://doi.org/10.1097/00004032-199903000-00008' ~ 'relevant',
+    doi = 'https://doi.org/10.1371/journal.pone.0108358' ~ 'irrelevant', # probabilistic causation
+    doi = 'https://doi.org/10.1111/j.1539-6924.1984.tb00142.x' ~ 'relevant', 
+    doi = 'https://doi.org/10.1111/j.1539-6924.1986.tb00227.x' ~ 'relevant', 
+    doi = 'https://doi.org/10.7326/0003-4819-107-4-581' ~ 'irrelevant', 
+    doi = 'https://doi.org/10.1097/01.hp.0000285798.55584.6d' ~ 'relevant', 
+    doi = 'https://doi.org/10.1073/pnas.1520213113' ~ 'irrelevant', # probabilistic causation
+    doi = 'https://doi.org/10.1002/ajim.22063' ~ 'irrelevant', 
+    doi = 'https://doi.org/10.1186/s40557-018-0220-5' ~ 'relevant', 
+    doi = 'https://doi.org/10.1097/01.hp.0000305824.21020.10' ~ 'relevant', # important
+    doi = 'https://doi.org/10.1080/02698590903197757' ~ 'relevant', # mechanistic evidence, philosophical point of view 
+    doi = 'https://doi.org/10.1093/lpr/mgx012' ~ 'relevant', # Legal perspective 
+    doi = 'https://doi.org/10.3961/jpmph.16.002' ~ 'relevant', # Legal Korea
+    doi = 'https://doi.org/10.1002/ajim.22159' ~ 'irrelevant', 
+    doi = 'https://doi.org/10.1080/10807039.2012.707926' ~ 'irrelevant', # PoC calculation with simulation, not lung cacner
+    doi = 'https://doi.org/10.1177/0193841x9902300603' ~ 'relevant', # Mentions lung cancer but mainly on swine flu vaccine and GBS 
+    doi = 'https://doi.org/10.4178/epih/e2015026' ~ '', 
+    doi = 'https://doi.org/10.1007/s00411-022-01012-1' ~ '', 
+    doi = 'https://doi.org/10.1093/lpr/mgp009' ~ '', 
+    doi = 'https://doi.org/10.1002/car.2266' ~ '', 
+    doi = 'https://doi.org/10.1214/07-sts234' ~ '', 
+    doi = 'https://doi.org/10.1002/ajim.20540' ~ '', 
+    doi = 'https://doi.org/10.1101/000919' ~ '', 
+    doi = 'https://doi.org/10.3233/idt-2010-0074' ~ '', 
+    doi = 'https://doi.org/10.1097/01.hp.0000264593.05229.d0' ~ '', 
+    doi = 'https://doi.org/10.3389/fendo.2022.1078258' ~ '', 
+    doi = 'https://doi.org/10.1353/jnt.2023.0007' ~ '', 
+    doi = 'https://doi.org/10.1177/0025817214528433' ~ '', 
+    doi = 'https://doi.org/10.1186/s12911-022-01788-8' ~ '', 
+    doi = 'https://doi.org/10.1002/j.2333-8504.1993.tb01530.x' ~ '', 
+    doi = 'https://doi.org/10.1177/009145099602300407' ~ '', 
+    doi = 'https://doi.org/10.3998/ergo.12405314.0004.030' ~ '', 
+    doi = 'https://doi.org/10.1002/ffej.20065' ~ '', 
+    doi = 'https://doi.org/10.1504/ijlr.2014.063411' ~ '', 
+    doi = 'https://doi.org/10.1097/00004032-199210000-00004' ~ '', 
+    doi = 'https://doi.org/10.1093/rpd/ncw122' ~ '', 
+    doi = 'https://doi.org/10.5453/jhps.56.306' ~ '',
+    TRUE ~ NA_character_
   )
-```
-
-
-### Any type of cancer 
-
-```{r}
-# Create the search string
-search_string <- str_glue(
-    "((({pop}) AND ({concept}) AND ({context})))",
-    pop = paste(population_quoted, collapse = " OR "),
-    concept = paste(concept_quoted, collapse = " OR "),
-    context = paste(context_quoted, collapse = " OR ")
 )
 
-search_string
-```
-
-Query String (Open Alex)
-```{r}
-query_string <- str_glue(
-  "https://api.openalex.org/works?filter=title_and_abstract.search:{search}",
-  search = search_string
-)
-
-query_string
-```
-
-Search in open Alex with duration 
-
-```{r}
-#| eval: false
-start_time <- Sys.time()
-
-results_cancer <- oa_fetch(
-  search = search_string,
-  entity = "works"
-)
-
-end_time <- Sys.time()
-search_duration <- difftime(end_time, start_time)
-search_duration
-```
-
-```{r}
 saveRDS(
-  results_cancer, 
-  file = paste0(inputfolder, "/", lubridate::today(),"_OpenAlex_Cancer.rds")
-  )
+  results_manual, 
+  file = paste0(inputfolder, "/PoC/2025-05-14_OpenAlex_extra.rds")
+)
 ```
 
-{{< pagebreak >}}
 
 
 # References
@@ -408,6 +395,11 @@ writeLines(
 
 session
 ```
+
+```{r}
+p3
+```
+
 
 # Package References
 

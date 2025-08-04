@@ -1,5 +1,3 @@
-#| include: false
-
 # Initialize results dataframe with new columns
 results <- data.frame(
   record_id = character(),
@@ -16,6 +14,7 @@ results <- data.frame(
   label = character(),
   source = character(),
   issn = character(),
+  publication_type = character(),  # <-- added this line
   stringsAsFactors = FALSE
 )
 
@@ -34,7 +33,7 @@ for(i in seq(1, total_count, batch_size)) {
                             rettype="xml", parsed=TRUE)
     
     # Process each article in the batch
-    articles <- XML::xpathApply(records, "//PubmedArticle")
+    articles <- XML::xpathApply(records, "//*[(name()='PubmedArticle' or name()='PubmedBookArticle')]")
     
     for(article in articles) {
       # Extract record_id (PubMed ID)
@@ -91,6 +90,10 @@ for(i in seq(1, total_count, batch_size)) {
       # Extract source (source is usually publisher or similar, but may need a custom field)
       source <- NA  # Add logic if 'source' exists in the XML structure
       
+      # Extract publication type
+      publication_type <- XML::xpathSApply(article, ".//PublicationTypeList/PublicationType", XML::xmlValue)
+      publication_type <- if(length(publication_type) > 0) paste(publication_type, collapse=", ") else NA  # <-- added
+      
       # Add to results
       results <- rbind(results, data.frame(
         record_id = record_id,
@@ -107,6 +110,7 @@ for(i in seq(1, total_count, batch_size)) {
         label = label,
         source = source,
         issn = issn,
+        publication_type = publication_type, 
         stringsAsFactors = FALSE
       ))
     }

@@ -1,0 +1,39 @@
+## PubMed 
+
+
+"Workers' Compensation"[Mesh] OR "compensation scheme"[tiab] OR "compensation system"[tiab] 
+
+AND 
+
+"Occupational Diseases"[Mesh] OR "work-related illness"[tiab] OR "occupational illness"[tiab]
+
+AND 
+
+damage*[tiab] OR reparation*[tiab] OR pecuniary[tiab] OR "economic loss"[tiab] OR "financial loss"[tiab] OR "lost wages"[tiab] OR "pension"[tiab] OR "life lost"[tiab] OR "Life Expectancy"[Mesh] OR "Quality of Life"[Mesh] OR immaterial[tiab] OR "non-economic"[tiab] OR "pain and suffering"[tiab] OR suffering[tiab] OR emotional[tiab] OR moral[tiab] OR "mental anguish"[tiab]
+
+AND 
+
+"2000/01/01"[Date - Publication] : "2025/12/31"[Date - Publication]
+
+
+## Embase 
+
+'workman compensation'/exp OR 'compensation scheme':ti,ab,kw OR 'compensation system':ti,ab,kw
+
+AND 
+
+'occupational disease'/exp OR 'work-related illness':ti,ab,kw OR 'occupational illness':ti,ab,kw
+
+AND 
+
+'damage*':ti,ab OR 'reparation*':ti,ab OR 'pecuniary':ti,ab OR 'economic loss':ti,ab OR 'financial loss':ti,ab OR 'lost wages':ti,ab OR 'pension':ti,ab OR 'life lost':ti,ab OR 'life expectancy'/exp OR 'quality of life'/exp OR 'immaterial':ti,ab OR 'non-economic':ti,ab OR 'pain and suffering':ti,ab OR 'suffering':ti,ab OR 'emotional':ti,ab OR 'moral':ti,ab OR 'mental anguish':ti,ab
+
+AND 
+
+[2000-2025]/py
+
+
+
+## CINAHL 
+
+( ( (MH "Workers' Compensation") OR "compensation scheme" OR "compensation system" ) ) AND ( ( damage* OR reparation* OR pecuniary OR "economic loss" OR "financial loss" OR "lost wages" OR pension OR "life lost" OR (MH "Life Expectancy") OR (MH "Quality of Life") OR immaterial OR "non-economic" OR "pain and suffering" OR suffering OR emotional OR moral OR "mental anguish" ) ) AND (DT 20000101-20251231) 

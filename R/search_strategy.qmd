@@ -58,6 +58,7 @@ if (!require("pacman", quietly = TRUE)) {
 pacman::p_load(
   devtools,         # Used to install packages from GitHub.
   tidyverse,        # Used for basic data handling and visualization.
+  readxl,           # Used to read excel files.
   overviewR,        # Used to check missing data.
   gt,               # Used to print html tables.  
   report            # Used to cite packages used in this session.   
@@ -67,6 +68,118 @@ pacman::p_load_gh("elizagrames/litsearchr")  # Used to develop and refine search
 
 ```
 
+```{r}
+naiveresults <- read_excel(
+  path = paste0(psfolder, "/2024-12-03_search_PoC_Lung_Cancer_deduplicated.xlsx"),
+  sheet = "2024-12-03_search_PoC_Lung"
+)
+```
+
+```{r}
+rakedkeywords <-
+  litsearchr::extract_terms(
+    text = paste(naiveresults$title, naiveresults$abstract),
+    method = "fakerake",
+    min_freq = 2,
+    ngrams = TRUE,
+    min_n = 2,
+    language = "English"
+  )
+```
+
+```{r}
+all_keywords <- unique(rakedkeywords)
+
+naivedfm <-
+  litsearchr::create_dfm(
+    elements = paste(naiveresults$title, naiveresults$abstract),
+    features = all_keywords
+  )
+
+naivegraph <-
+  litsearchr::create_network(
+    search_dfm = naivedfm,
+    min_studies = 2,
+    min_occ = 2
+  )
+```
+
+```{r}
+cutoff <-
+  litsearchr::find_cutoff(
+    naivegraph,
+    method = "changepoint",
+    knot_num = 3
+    )
+
+reducedgraph <-
+  litsearchr::reduce_graph(naivegraph, cutoff_strength = cutoff[1])
+
+searchterms <- litsearchr::get_keywords(reducedgraph)
+
+set.seed(2024)
+sample(searchterms, 20)
+```
+
+```{r}
+write.csv(searchterms, file = file.path(psfolder,"search_terms_manual_review.csv"))
+```
+
+
+```{r}
+grouped_terms <- read_excel(
+  path = paste0(psfolder, "/search_terms_manual_review.xlsx"),
+  sheet = "search_terms_manual_review"
+) %>% filter(group != "drop")
+```
+
+```{r}
+grouped_terms %>% 
+  group_by(group) %>% 
+  summarise(n = n())
+```
+
+```{r}
+source("scripts/search_terms.R")
+```
+
+
+```{r}
+# Append terms from grouped_terms to the manually defined vectors
+concept <- unique(c(concept, grouped_terms$term[grouped_terms$group == "concept"]))
+occupational <- unique(c(occupational, grouped_terms$term[grouped_terms$group == "occupational"]))
+population <- unique(c(population, grouped_terms$term[grouped_terms$group == "population"]))
+lung <- unique(c(lung, grouped_terms$term[grouped_terms$group == "lung"]))
+financial <- unique(c(financial, grouped_terms$term[grouped_terms$group == "financial"]))
+
+mysearchterms <- list(
+  concept = concept,
+  population = population,
+  occupational = occupational,
+  lung = lung
+)
+```
+
+```{r}
+my_search <-
+  litsearchr::write_search(
+    groupdata = mysearchterms,
+    languages = "English",
+    stemming = FALSE,
+    closure = "right",
+    exactphrase = TRUE,
+    writesearch = TRUE,
+    directory = paste0(tempfolder,"/"),
+    verbose = TRUE
+  )
+
+my_search
+```
+
+
+```{r}
+grouped_terms %>% filter(group == "financial") %>% group_by(term) %>% pull(term)
+```
 
 
 {{< pagebreak >}}

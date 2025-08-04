@@ -1,0 +1,156 @@
+---
+title: "Evaluation of the probability of causation for lung cancer workers' compensation"
+subtitle: "Screening"
+author: 
+  - name: Javier Mancilla Galindo
+    affiliation: Institute for Risk Assessment Sciences, Utrecht University, Utrecht, The Netherlands
+    orcid: 0000-0002-0718-467X
+    email: j.mancillagalindo@uu.nl
+keywords: ["probability of causation", "assigned share", "lung cancer", "causality", "scoping review"]
+date: today
+execute: 
+  echo: false
+  warning: false
+fig-cap-location: top
+format:
+  html:
+    toc: true
+    toc-depth: 1
+    embed-resources: true
+  docx:
+    toc: false
+    reference-doc: ../docs/manuscript/template.docx
+    link-citations: true
+  pdf:
+    toc: false
+    documentclass: scrartcl
+zotero: probability-of-causation
+bibliography: ../docs/manuscript/references.bib
+csl: ../docs/manuscript/american-medical-association.csl
+editor: source
+---
+
+```{r}
+#| label: directories
+#| include: false
+
+# Create directories for sub-folders  
+inputfolder <- "../data/raw"
+psfolder <- "../data/processed"
+tempfolder <- "../data/temp"
+figfolder <- "../results/output_figures"
+tabfolder <- "../results/output_tables"
+
+dir.create(inputfolder, showWarnings = FALSE)
+dir.create(psfolder, showWarnings = FALSE)
+dir.create(tempfolder, showWarnings = FALSE)
+dir.create(figfolder, showWarnings = FALSE)
+dir.create(tabfolder, showWarnings = FALSE)
+```
+
+```{r}
+#| label: packages
+#| include: false 
+
+if (!require("pacman", quietly = TRUE)) {
+  install.packages("pacman")
+}
+
+pacman::p_load(
+  tidyverse,        # Used for basic data handling and visualization.
+  overviewR,        # Used to check missing data.
+  gt,               # Used to print html tables.  
+  report            # Used to cite packages used in this session.   
+)
+
+
+```
+
+The machine learning assisted learning tool ASReview[@Vandeschoot2021] (v.1.6.3) was used for the pilot screening phase, whereas v.2.0.2 will be used in the screening stage of the full-length review. The SAFE procedure will be followed as the stopping heuristic for screening.[@Boetje2024]
+
+# Full-length review screening 
+
+Three percent of the records were randomly screened to determine the number of relevant records expected in the whole dataset, according to the SAFE procedure. The size of the training set ( $t$ ) is:
+
+
+$$ t = 1129 \times 0.03 $$
+
+Thus, **`r ceiling(1129*0.03)` records** were randomly reviewed. 
+
+There was 1 relevant record ($RR_t$) found. Thus, the number of relevant records ($RR_T$) expected in the whole dataset ($T$) is:
+
+$$ RR_T = \frac{RR_t}{t} \times T $$
+
+A total of **`r ceiling((1/34*1129))` relevant records** are expected. These will later be used as the prior knowledge in the full dataset used in the scoping review. 
+
+According to the SAFE procedure, active learning with an initial lightweight model (ELAS u4, default configuration) will be used according to the following stopping heuristics: 
+
+-   At least twice the ($RR_T$) should be screened: **`r ceiling((1/34*1129)) * 2` records**
+-   A minimum of 10% of the records should be screened: **`r ceiling(1129*0.1)` records**
+-   No extra relevant records have been identified in the last 25 records. 
+
+When these criteria are met, the model will be changed to the ELAS h3 deep learning model (default configuration), to allow the identification of more complex semantic context that can uncover difficult to find records.  
+
+The stopping heuristic will be: 
+
+-   No extra relevant records have been identified in the last 25 records. 
+
+# Pilot Screening 
+
+For the pilot screening phase, 5% of the records from the lung cancer search were be randomly screened to determine the number of relevant records expected in the whole dataset, according to the SAFE procedure. The size of the training set ( $t$ ) is:
+
+
+$$ t = 453 \times 0.05 $$
+
+Thus, **`r ceiling(453*0.05)` records** were randomly reviewed. 
+
+There was 1 relevant record ($RR_t$) found. Thus, the number of relevant records ($RR_T$) expected in the whole dataset ($T$) is:
+
+$$ RR_T = \frac{RR_t}{t} \times T $$
+
+A total of **`r ceiling((1/23*453))` relevant records** were expected, but only 10 were selected chosen for pilot data extraction. These records were later incorporated as prior knowledge in the full dataset used in the scoping review. 
+
+
+# References
+
+::: {#refs}
+:::
+
+{{< pagebreak >}}
+
+# Session Information
+
+```{r}
+#| label: session
+# remove clutter
+session <- sessionInfo()
+session$BLAS <- NULL
+session$LAPACK <- NULL
+session$loadedOnly <- NULL
+# write log file
+writeLines(
+  capture.output(print(session, locale = FALSE)),
+  paste0("sessions/",lubridate::today(), "_screening.txt")
+)                                   
+
+session
+```
+
+{{< pagebreak >}}
+
+# Package References
+
+```{r}
+#| output: asis
+report::cite_packages(session)
+```
+
+```{r}
+#| include: false
+
+# Run this chunk if you wish to clear your environment and unload packages.
+
+pacman::p_unload(negate = TRUE)
+
+rm(list = ls())
+```
