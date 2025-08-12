@@ -6,11 +6,6 @@ author:
     affiliation: Institute for Risk Assessment Sciences, Utrecht University, Utrecht, The Netherlands
     orcid: 0000-0002-0718-467X
     email: j.mancillagalindo@uu.nl
-abstract: |
-  <b>Objective:</b> The probability of causation  
-  <b>Introduction:</b> The probability of causation  
-  <b>Inclusion criteria:</b> The probability of causation 
-  <b>Methods:</b> The probability of causation 
 keywords: ["probability of causation", "assigned share", "lung cancer", "causality", "scoping review"]
 execute: 
   echo: false

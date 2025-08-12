@@ -34,6 +34,9 @@ editor: source
 #| label: directories
 #| include: false
 
+# Run when using Positron (for compatibility with RStudio project)
+setwd(paste0(getwd(),"/R"))
+
 # Create directories for sub-folders  
 inputfolder <- "../data/raw"
 psfolder <- "../data/processed"

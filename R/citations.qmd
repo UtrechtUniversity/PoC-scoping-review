@@ -1,0 +1,399 @@
+---
+title: "Evaluation of the probability of causation approach for lung cancer: Scoping review"
+subtitle: "Snowball citation retrieval"
+author: 
+  - name: Javier Mancilla Galindo
+    affiliation: Institute for Risk Assessment Sciences, Utrecht University, Utrecht, The Netherlands
+    orcid: 0000-0002-0718-467X
+    email: j.mancillagalindo@uu.nl
+date: today
+keywords: ["probability of causation", "assigned share", "lung cancer", "causality", "scoping review"]
+execute: 
+  echo: false
+  warning: false
+toc: true
+toc-depth: 1
+format:
+  html:
+    toc: true
+    embed-resources: true
+  docx:
+    reference-doc: ../docs/manuscript/template.docx
+    link-citations: true
+zotero: probability-of-causation
+bibliography: ../docs/manuscript/references.bib
+csl: ../docs/manuscript/american-medical-association.csl
+editor: source
+---
+
+{{< pagebreak >}}
+
+```{r}
+#| label: directories
+#| include: false
+
+# Run when using Positron (for compatibility with RStudio project)
+# setwd(paste0(getwd(),"/R"))
+
+# Create directories for sub-folders  
+inputfolder <- "../data/raw"
+psfolder <- "../data/processed"
+tempfolder <- "../data/temp"
+figfolder <- "../results/output_figures"
+tabfolder <- "../results/output_tables"
+
+dir.create(inputfolder, showWarnings = FALSE)
+dir.create(psfolder, showWarnings = FALSE)
+dir.create(tempfolder, showWarnings = FALSE)
+dir.create(figfolder, showWarnings = FALSE)
+dir.create(tabfolder, showWarnings = FALSE)
+```
+
+```{r}
+#| label: packages
+#| include: false 
+
+if (!require("pak", quietly = TRUE)) {
+  install.packages("pak")
+}
+
+pak::pkg_install("camaradesuk/ASySD")  # Used to deduplicate studies
+pak::pkg_install("pacman")  # Used to deduplicate studies
+
+pacman::p_load(
+  devtools,         # Used to install packages from GitHub.
+  tidyverse,        # Used for basic data handling and visualization.
+  readxl,           # Used to read Excel files.
+  openalexR,        # Used to retrieve OpenAlex entries.
+  ASySD,            # Used to deduplicate records.
+  gt,               # Used to print html tables.  
+  report            # Used to cite packages used in this session.   
+)
+
+```
+
+# OpenAlex snowball citation retrieval
+
+```{r}
+#| include: false
+
+# Set environment options for OpenAlex API requests. Script hidden due to 
+# personal data. This is not necessary to reproduce the findings. 
+# See documentation for relevant code: https://docs.ropensci.org/openalexR/
+source("scripts/options_openAlex.R")
+```
+
+```{r}
+# Load data 
+
+data <- read_xlsx(
+  file.path(psfolder,"PoC/2025_08_11_PoC_for_snowball.xlsx")
+)
+
+relevant <- data %>% filter(asreview_label == "1")
+```
+
+The full dataset screened with ASReview includes n = `r count(data)` records, out of which n = `r count(relevant)` were labeled as relevant.
+
+```{r}
+relevant_open_alex <- oa_fetch( 
+  entity = "works", 
+  doi = relevant$doi,
+  output = "dataframe",
+  verbose = TRUE
+  )
+```
+
+After fetching metadata from OpenAlex for the `r count(relevant)` relevant records using their DOIs, a total n = `r count(relevant_open_alex)` records with complete OpenAlex metadata were identified. This means that one record[@Choudat2003] from the relevant dataset was not included for snowball citation retrieval.
+
+```{r}
+snowball_docs <- oa_snowball( 
+  doi = relevant$doi,
+  id_type = "original",
+  verbose = TRUE 
+  )
+```
+
+```{r}
+data_snowball <- snowball2df(snowball_docs, verbose = TRUE) 
+```
+
+The `openalexR` package was used to perform citation snowballing to identify additional relevant studies by searching both cited references and citing papers for the relevant records and converted snowball search results into a structured dataframe format for further processing. The initial snowball dataset contains n = `r count(data_snowball)` records.
+
+```{r}
+data_snowball <- data_snowball %>% 
+  filter(is_retracted == FALSE) %>%
+  filter(type %in% c("preprint", "article"))
+
+seed_papers <- sum(data_snowball$oa_input == TRUE)
+forward_only <- sum(data_snowball$oa_input == FALSE & data_snowball$forward_count > 0 & data_snowball$backward_count == 0)
+backward_only <- sum(data_snowball$oa_input == FALSE & data_snowball$backward_count > 0 & data_snowball$forward_count == 0)
+both_directions <- sum(data_snowball$oa_input == FALSE & data_snowball$forward_count > 0 & data_snowball$backward_count > 0)
+```
+
+Retracted papers were excluded and only articles and preprints were kept, resulting in the exclusion of 1 review paper from the initial set of relevant papers,[@guidotti2002] for which nonetheless all its relevant citations had already been obtained. Therefore, the size of the snowball dataset was n = `r count(data_snowball)` records, out of which:
+
+-   seed papers (relevant in ASReview dataset) n = `r seed_papers`,
+-   citing papers (forward citations) n = `r forward_only`,
+-   referenced papers (backward citations) n = `r backward_only`, and
+-   papers connected in both directions n = `r both_directions`.
+
+```{r}
+# Load OpenAlex data
+openalex_source <- readRDS(paste0(inputfolder, "/PoC/2025-05-14_OpenAlex.rds"))
+
+# Load manually added records from a broader OpenAlex search, with exact matches of key concepts.
+openalex_extra <- readRDS(paste0(inputfolder, "/PoC/2025-05-14_OpenAlex_extra.rds")) 
+
+# There are no duplicates, so we can bind the two datasets and 
+# prepare data for ASySD deduplication.
+openalex_poc <- openalex_source %>% 
+  bind_rows(openalex_extra) %>%
+  filter(type %in% c("preprint", "article"))
+```
+
+The original OpenAlex records from the PoC search (n = `r count(openalex_poc)`) was loaded to deduplicate previously identified records.
+
+```{r}
+# Columns to select 
+columns <- c("record_id", "author", "year", "journal", "doi", "title", "pages",
+             "volume", "number", "abstract", "issn", "label", "source")
+
+openalex_snowball <- data_snowball %>% 
+  filter(!id %in% openalex_poc$id) %>% 
+  mutate(
+    record_id = id,
+    author = map_chr(author, ~ if (is.data.frame(.x)) {
+      paste(.x$au_display_name, collapse = "; ")
+    } else {
+      NA_character_ 
+    }),
+    year = publication_year, 
+    journal = so,
+    pages = case_when(
+      !is.na(first_page) & !is.na(last_page) & first_page == last_page ~ as.character(first_page),
+      !is.na(first_page) & !is.na(last_page) ~ paste0(first_page, "-", last_page),
+      !is.na(first_page) ~ as.character(first_page),
+      !is.na(last_page) ~ as.character(last_page),
+      TRUE ~ NA_character_
+      ),
+    number = issue, 
+    abstract = ab,
+    issn = issn_l,
+    doi = str_replace(doi, "https://doi.org/", ""),
+    source = "open_alex",
+    label = record_id
+  ) %>% 
+  select(all_of(columns)) 
+
+data_poc <- data %>% 
+  mutate(
+    record_id = as.character(record_id),
+    label = NA_character_
+    ) %>% 
+  select(all_of(columns)) 
+```
+
+Those records in the original OpenAlex dataset screened with ASReview were removed from the new snowball citation dataset, resulting in (n = `r count(openalex_snowball)`) remaining records.
+
+# Deduplication
+
+```{r}
+#| label: merge poc
+# Bind Embase, PubMed, and OpenAlex 
+records_poc <- bind_rows(
+  data_poc, 
+  openalex_snowball
+  ) %>% 
+  mutate(
+    # Make doi lowercase 
+    doi = str_to_lower(doi)
+  )
+
+```
+
+The combined set of studies (PubMed + Embase + OpenAlex) screened with ASReview (n = `r count(data_poc)`) with the snowball citations (n = `r count(openalex_snowball)`) contains **n = `r count(records_poc)` records**. These will be deduplicated using the Automated Systematic Search Deduplicator (ASySD).[@ASySD2023]
+
+```{r}
+#| label: deduplication poc
+
+# Deduplicate studies
+poc_deduplicated <- dedup_citations(
+  records_poc,
+  manual_dedup =  TRUE,
+  show_unknown_tags = FALSE,
+  user_input = 1
+  )
+
+poc_unique <- poc_deduplicated$unique 
+poc_manual_dedup <- poc_deduplicated$manual_dedup %>% 
+  mutate(
+    result = case_when(
+      doi >0.9999 ~ TRUE, 
+      TRUE ~ NA
+    )
+  )
+```
+
+Automatic deduplication resulted in n = `r count(poc_unique)` unique records and n = `r count(poc_manual_dedup)` potential duplicates requiring manual review.
+
+```{r}
+#| eval: false
+true_dups <- manual_dedup_shiny(poc_manual_dedup)
+saveRDS(true_dups, file = paste0(tempfolder, "/", lubridate::today(),"_true_duplicates_PoC_citations.rds"))
+```
+
+```{r}
+true_dups <- readRDS(paste0(tempfolder, "/2025-08-12_true_duplicates_PoC_citations.rds")) 
+poc_final_dedup <- dedup_citations_add_manual(poc_unique, additional_pairs = true_dups)
+```
+
+After manual deduplication, the dataset contained n = `r count(poc_final_dedup)` records.
+
+```{r}
+# There are remaining duplicates by doi 
+remaining_dups <- poc_final_dedup %>% 
+  group_by(doi) %>% 
+  mutate(n = n()) %>% 
+  filter(n > 1 & !is.na(doi)) %>%
+  ungroup() %>% 
+  arrange(doi)
+
+# remaining_dups %>% count()
+```
+
+Remaining duplicate records sharing the same DOI (n = `r count(remaining_dups)`) were identified.
+
+```{r}
+# Helper function
+assign_source_priority <- function(df) {
+  df %>%
+    mutate(source_priority = case_when(
+      str_detect(source, "pubmed") ~ 1,
+      str_detect(source, "embase") ~ 2,
+      str_detect(source, "open_alex") ~ 3,
+      TRUE ~ 4
+    ))
+}
+
+# Deduplicate by DOI (excluding NA)
+dedup_part <- poc_final_dedup %>%
+  filter(!is.na(doi)) %>%
+  assign_source_priority() %>%
+  group_by(doi) %>%
+  arrange(source_priority) %>%
+  summarise(
+    across(-c(source, record_ids, source_priority), first),
+    source = paste(source, collapse = ", "),
+    record_ids = paste(record_ids, collapse = ", "),
+    .groups = "drop"
+  )
+
+# Keep rows with missing DOI
+dedup_na_part <- poc_final_dedup %>%
+  filter(is.na(doi))
+
+# Combine and deduplicate further by title, then abstract
+records_final_unique <- bind_rows(dedup_part, dedup_na_part) %>%
+  assign_source_priority() %>%
+  group_by(title) %>%
+  arrange(source_priority) %>%
+  summarise(
+    across(-c(source, record_ids, source_priority), first),
+    source = paste(source, collapse = ", "),
+    record_ids = paste(record_ids, collapse = ", "),
+    .groups = "drop"
+  ) %>%
+  assign_source_priority() %>%
+  group_by(abstract) %>%
+  arrange(source_priority) %>%
+  summarise(
+    across(-c(source, record_ids, source_priority), first),
+    source = paste(source, collapse = ", "),
+    record_ids = paste(record_ids, collapse = ", "),
+    .groups = "drop"
+  ) %>%
+  ungroup()
+
+# Clean abstract and filter html tag entries
+records_final_unique <- records_final_unique %>%
+  mutate(
+    abstract = str_remove_all(abstract, "<h3>|</h3>|<sup>\\d+</sup>")
+  ) %>%
+  filter(!str_detect(abstract, "^[^a-zA-Z]")) %>%
+  select(
+    duplicate_id, author, year, journal, doi, title, abstract,
+    pages, volume, number, issn, record_ids, source, isbn, label
+  )
+```
+
+```{r}
+records_final_snowball <- records_final_unique |> 
+  filter(str_detect(duplicate_id, "https")) |> 
+  mutate(
+    duplicate_id = seq(from = max(data$duplicate_id) + 1, 
+                           length.out = n(), 
+                           by = 1),
+    year = as.numeric(year)
+  ) 
+```
+
+Hierarchical deduplication by DOI, title, and abstract with source priority (PubMed \> Embase \> OpenAlex) was appliead and HTML tags from abstracts were cleaned, followed by filtering out records with malformed abstracts. Subsequently, new records from snowball search (those with URL-based IDs) were identified and processed, resulting in the removal of those already present in the ASReview dataset, followed by assigning new sequential duplicate IDs. As a result, there were n = `r count(records_final_snowball)` new snowball records to be added.
+
+# Final dataset
+
+```{r}
+data_final <- bind_rows(data, records_final_snowball)
+```
+
+The original dataset was combined with the retrieved snowball records to create the final dataset. The final combined dataset has **n = `r count(data_final)` records** (original: n = `r count(data)`, new: n = `r count(records_final_snowball)`).
+
+```{r}
+write_citations(
+  data_final,
+  type = "csv",
+  filename = paste0(psfolder, "/PoC/2025-08-12_PoC_snowball.csv")
+  )
+```
+
+# References
+
+::: {#refs}
+:::
+
+{{< pagebreak >}}
+
+# Session
+
+```{r}
+#| label: session
+# remove clutter
+session <- sessionInfo()
+session$BLAS <- NULL
+session$LAPACK <- NULL
+session$loadedOnly <- NULL
+# write log file
+writeLines(
+  capture.output(print(session, locale = FALSE)),
+  paste0("sessions/",lubridate::today(), "_citations.txt")
+)                                   
+
+session
+```
+
+# Package References
+
+```{r}
+#| output: asis
+report::cite_packages(session)
+```
+
+```{r}
+#| include: false
+
+# Run this chunk if you wish to clear your environment and unload packages.
+
+pacman::p_unload(negate = TRUE)
+
+rm(list = ls())
+```

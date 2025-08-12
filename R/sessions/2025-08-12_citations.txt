@@ -1,0 +1,16 @@
+R version 4.4.2 (2024-10-31 ucrt)
+Platform: x86_64-w64-mingw32/x64
+Running under: Windows 11 x64 (build 26100)
+
+Matrix products: default
+
+
+attached base packages:
+[1] stats     graphics  grDevices utils     datasets  methods   base     
+
+other attached packages:
+ [1] report_0.6.1     gt_1.0.0         ASySD_0.4.5.9000 openalexR_1.4.0 
+ [5] readxl_1.4.5     lubridate_1.9.4  forcats_1.0.0    stringr_1.5.1   
+ [9] dplyr_1.1.4      purrr_1.1.0      readr_2.1.5      tidyr_1.3.1     
+[13] tibble_3.3.0     ggplot2_3.5.2    tidyverse_2.0.0  devtools_2.4.5  
+[17] usethis_3.1.0    pak_0.9.0       
