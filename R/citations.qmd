@@ -17,6 +17,10 @@ format:
   html:
     toc: true
     embed-resources: true
+    code-links:
+        - text: "GitHub"
+          href: https://github.com/UtrechtUniversity/PoC-scoping-review
+          icon: github
   docx:
     reference-doc: ../docs/manuscript/template.docx
     link-citations: true
@@ -32,7 +36,7 @@ editor: source
 #| label: directories
 #| include: false
 
-# Run when using Positron (for compatibility with RStudio project)
+# Run only when using Positron (for compatibility with RStudio project)
 # setwd(paste0(getwd(),"/R"))
 
 # Create directories for sub-folders  
@@ -50,8 +54,8 @@ dir.create(tabfolder, showWarnings = FALSE)
 ```
 
 ```{r}
-#| label: packages
-#| include: false 
+#| label: install packages
+#| eval: false 
 
 if (!require("pak", quietly = TRUE)) {
   install.packages("pak")
@@ -59,6 +63,16 @@ if (!require("pak", quietly = TRUE)) {
 
 pak::pkg_install("camaradesuk/ASySD")  # Used to deduplicate studies
 pak::pkg_install("pacman")  # Used to deduplicate studies
+```
+
+
+```{r}
+#| label: load packages
+#| include: false
+
+if (!require("pacman", quietly = TRUE)) {
+  install.packages("pacman")
+}
 
 pacman::p_load(
   devtools,         # Used to install packages from GitHub.
@@ -69,7 +83,6 @@ pacman::p_load(
   gt,               # Used to print html tables.  
   report            # Used to cite packages used in this session.   
 )
-
 ```
 
 # OpenAlex snowball citation retrieval
@@ -363,8 +376,6 @@ write_citations(
 
 {{< pagebreak >}}
 
-# Session
-
 ```{r}
 #| label: session
 # remove clutter
@@ -377,8 +388,6 @@ writeLines(
   capture.output(print(session, locale = FALSE)),
   paste0("sessions/",lubridate::today(), "_citations.txt")
 )                                   
-
-session
 ```
 
 # Package References
@@ -387,6 +396,8 @@ session
 #| output: asis
 report::cite_packages(session)
 ```
+
+> For specific information on the operating system, R version, and R package versions used, please refer to the R/session folder in the GitHub repository.
 
 ```{r}
 #| include: false

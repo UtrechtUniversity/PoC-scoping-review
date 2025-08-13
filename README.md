@@ -27,6 +27,7 @@ Although I have made significant efforts to ensure reproducibility of this proje
 -   [search_strategy.qmd](R/search_strategy.qmd). 
 -   [deduplication.qmd](R/data_extraction.qmd).
 -   [screening.qmd](R/data_analysis.qmd).
+-   [citations.qmd](R/citations.qmd).
 
 ### Protocol versions 
 
