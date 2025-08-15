@@ -87,6 +87,8 @@ pacman::p_load(
 
 # OpenAlex snowball citation retrieval
 
+One manual duplicate was identified and removed (duplicate_id = 2683 removed, 2662 kept), keeping the published version and discarding the preprint version.
+
 ```{r}
 #| include: false
 
@@ -356,7 +358,8 @@ Hierarchical deduplication by DOI, title, and abstract with source priority (Pub
 # Final dataset
 
 ```{r}
-data_final <- bind_rows(data, records_final_snowball)
+data_final <- bind_rows(data, records_final_snowball) %>% 
+  mutate(included = asreview_label)
 ```
 
 The original dataset was combined with the retrieved snowball records to create the final dataset. The final combined dataset has **n = `r count(data_final)` records** (original: n = `r count(data)`, new: n = `r count(records_final_snowball)`).
@@ -365,7 +368,7 @@ The original dataset was combined with the retrieved snowball records to create 
 write_citations(
   data_final,
   type = "csv",
-  filename = paste0(psfolder, "/PoC/2025-08-12_PoC_snowball.csv")
+  filename = paste0(psfolder, "/PoC/2025-08-15_PoC_snowball.csv")
   )
 ```
 

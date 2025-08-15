@@ -7,7 +7,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
 
 <meta name="author" content="Javier Mancilla Galindo">
-<meta name="dcterms.date" content="2025-08-13">
+<meta name="dcterms.date" content="2025-08-15">
 <meta name="keywords" content="probability of causation, assigned share, lung cancer, causality, scoping review">
 
 <title>Evaluation of the probability of causation approach for lung cancer: Scoping review</title>
@@ -3112,7 +3112,7 @@ vertical-align: -.125em;
     <div>
     <div class="quarto-title-meta-heading">Published</div>
     <div class="quarto-title-meta-contents">
-      <p class="date">August 13, 2025</p>
+      <p class="date">August 15, 2025</p>
     </div>
   </div>
   
@@ -3133,7 +3133,8 @@ vertical-align: -.125em;
 <div style="page-break-after: always;"></div>
 <section id="openalex-snowball-citation-retrieval" class="level1">
 <h1>OpenAlex snowball citation retrieval</h1>
-<p>The full dataset screened with ASReview includes n = 1128 records, out of which n = 23 were labeled as relevant.</p>
+<p>One manual duplicate was identified and removed (duplicate_id = 2683 removed, 2662 kept), keeping the published version and discarding the preprint version.</p>
+<p>The full dataset screened with ASReview includes n = 1127 records, out of which n = 23 were labeled as relevant.</p>
 <p>After fetching metadata from OpenAlex for the 23 relevant records using their DOIs, a total n = 22 records with complete OpenAlex metadata were identified. This means that one record<span class="citation" data-cites="Choudat2003"><sup><a href="#ref-Choudat2003" role="doc-biblioref">1</a></sup></span> from the relevant dataset was not included for snowball citation retrieval.</p>
 <p>The <code>openalexR</code> package was used to perform citation snowballing to identify additional relevant studies by searching both cited references and citing papers for the relevant records and converted snowball search results into a structured dataframe format for further processing. The initial snowball dataset contains n = 1058 records.</p>
 <p>Retracted papers were excluded and only articles and preprints were kept, resulting in the exclusion of 1 review paper from the initial set of relevant papers,<span class="citation" data-cites="guidotti2002"><sup><a href="#ref-guidotti2002" role="doc-biblioref">2</a></sup></span> for which nonetheless all its relevant citations had already been obtained. Therefore, the size of the snowball dataset was n = 840 records, out of which:</p>
@@ -3148,15 +3149,15 @@ vertical-align: -.125em;
 </section>
 <section id="deduplication" class="level1">
 <h1>Deduplication</h1>
-<p>The combined set of studies (PubMed + Embase + OpenAlex) screened with ASReview (n = 1128) with the snowball citations (n = 813) contains <strong>n = 1941 records</strong>. These will be deduplicated using the Automated Systematic Search Deduplicator (ASySD).<span class="citation" data-cites="ASySD2023"><sup><a href="#ref-ASySD2023" role="doc-biblioref">3</a></sup></span></p>
-<p>Automatic deduplication resulted in n = 1927 unique records and n = 12 potential duplicates requiring manual review.</p>
-<p>After manual deduplication, the dataset contained n = 1917 records.</p>
+<p>The combined set of studies (PubMed + Embase + OpenAlex) screened with ASReview (n = 1127) with the snowball citations (n = 813) contains <strong>n = 1940 records</strong>. These will be deduplicated using the Automated Systematic Search Deduplicator (ASySD).<span class="citation" data-cites="ASySD2023"><sup><a href="#ref-ASySD2023" role="doc-biblioref">3</a></sup></span></p>
+<p>Automatic deduplication resulted in n = 1926 unique records and n = 12 potential duplicates requiring manual review.</p>
+<p>After manual deduplication, the dataset contained n = 1916 records.</p>
 <p>Remaining duplicate records sharing the same DOI (n = 6) were identified.</p>
 <p>Hierarchical deduplication by DOI, title, and abstract with source priority (PubMed &gt; Embase &gt; OpenAlex) was appliead and HTML tags from abstracts were cleaned, followed by filtering out records with malformed abstracts. Subsequently, new records from snowball search (those with URL-based IDs) were identified and processed, resulting in the removal of those already present in the ASReview dataset, followed by assigning new sequential duplicate IDs. As a result, there were n = 588 new snowball records to be added.</p>
 </section>
 <section id="final-dataset" class="level1">
 <h1>Final dataset</h1>
-<p>The original dataset was combined with the retrieved snowball records to create the final dataset. The final combined dataset has <strong>n = 1716 records</strong> (original: n = 1128, new: n = 588).</p>
+<p>The original dataset was combined with the retrieved snowball records to create the final dataset. The final combined dataset has <strong>n = 1715 records</strong> (original: n = 1127, new: n = 588).</p>
 </section>
 <section id="references" class="level1">
 <h1>References</h1>
