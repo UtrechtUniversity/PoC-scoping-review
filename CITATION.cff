@@ -1,12 +1,58 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
 cff-version: 1.2.0
-message: "If you use this software, please cite it as below."
-title: "My Research Software"
+title: >-
+  Evaluation of methods for workers' compensation of lung
+  cancer presumably due to workplace exposures: A scoping
+  review
+message: 'If you use this software, please cite it as below.'
+type: software
 authors:
-  - family-names: Druskat
-    given-names: Stephan
-    orcid: https://orcid.org/1234-5678-9101-1121
-version: 2.0.4
-date-released: 2021-08-11
-doi: 10.5281/zenodo.1234
-license: Apache-2.0
-repository-code: "https://github.com/citation-file-format/my-research-software"
+  - given-names: Javier
+    family-names: Mancilla Galindo
+    affiliation: >-
+      Institute for Risk Assessment Sciences, Utrecht
+      University, Utrecht, The Netherlands
+    orcid: 'https://orcid.org/0000-0002-0718-467X'
+    email: j.mancillagalindo@uu.nl
+  - given-names: Martijn A. H.
+    family-names: Oude Voshaar
+    affiliation: >-
+      Department of Public Health, Erasmus Medical Center,
+      Rotterdam, The Netherlands
+  - given-names: Lützen
+    family-names: Portengen
+    affiliation: >-
+      Institute for Risk Assessment Sciences, Utrecht
+      University, Utrecht, The Netherlands
+  - given-names: David
+    family-names: van Klaveren
+    affiliation: >-
+      Department of Public Health, Erasmus Medical Center,
+      Rotterdam, The Netherlands
+  - given-names: Roel
+    family-names: Vermeulen
+    affiliation: >-
+      Institute for Risk Assessment Sciences, Utrecht
+      University, Utrecht, The Netherlands
+  - given-names: Susan
+    family-names: Peters
+    affiliation: >-
+      Institute for Risk Assessment Sciences, Utrecht
+      University, Utrecht, The Netherlands
+identifiers:
+  - type: doi
+    value: 10.17605/OSF.IO/9EVSY
+    description: >-
+      Registration in the Open Science Framework for this
+      scoping review
+repository-code: 'https://github.com/UtrechtUniversity/PoC-scoping-review'
+url: 'https://github.com/UtrechtUniversity/PoC-scoping-review'
+keywords:
+  - probability of causation
+  - assigned share
+  - cancer
+  - causality
+  - scoping review
+license: MIT

@@ -1,0 +1,277 @@
+---
+title: "Evaluation of the probability of causation approach for lung cancer: Scoping review"
+subtitle: "Count of included studies"
+author: 
+  - name: Javier Mancilla Galindo
+    affiliation: Institute for Risk Assessment Sciences, Utrecht University, Utrecht, The Netherlands
+    orcid: 0000-0002-0718-467X
+    email: j.mancillagalindo@uu.nl
+date: today
+keywords: ["probability of causation", "assigned share", "lung cancer", "causality", "scoping review"]
+execute: 
+  echo: false
+  warning: false
+toc: true
+toc-depth: 1
+format:
+  html:
+    toc: true
+    embed-resources: true
+    code-links:
+        - text: "GitHub"
+          href: https://github.com/UtrechtUniversity/PoC-scoping-review
+          icon: github
+  docx:
+    reference-doc: ../docs/manuscript/template.docx
+    link-citations: true
+zotero: probability-of-causation
+bibliography: ../docs/manuscript/references.bib
+csl: ../docs/manuscript/american-medical-association.csl
+editor: source
+---
+
+{{< pagebreak >}}
+
+```{r}
+#| label: directories
+#| include: false
+
+# Run only when using Positron (for compatibility with RStudio project)
+# setwd(paste0(getwd(),"/R"))
+
+# Create directories for sub-folders  
+inputfolder <- "../data/raw"
+psfolder <- "../data/processed"
+tempfolder <- "../data/temp"
+figfolder <- "../results/output_figures"
+tabfolder <- "../results/output_tables"
+asreview <- "../asreview"
+
+dir.create(inputfolder, showWarnings = FALSE)
+dir.create(psfolder, showWarnings = FALSE)
+dir.create(tempfolder, showWarnings = FALSE)
+dir.create(figfolder, showWarnings = FALSE)
+dir.create(tabfolder, showWarnings = FALSE)
+dir.create(asreview, showWarnings = FALSE)
+```
+
+```{r}
+#| label: install packages
+#| eval: false 
+
+if (!require("pak", quietly = TRUE)) {
+  install.packages("pak")
+}
+pak::pkg_install("pacman")      # Used to deduplicate studies
+pak::pkg_install("PRISMA2020")  # Used to construct PRISMA flow diagram
+pak::pkg_install("webshot2")  # Used to construct PRISMA flow diagram
+pak::pkg_install("pagedown")  # Used to construct PRISMA flow diagram
+pak::pkg_install("chromote")  # Used to construct PRISMA flow diagram
+```
+
+```{r}
+#| label: load packages
+#| include: false
+
+if (!require("pacman", quietly = TRUE)) {
+  install.packages("pacman")
+}
+
+pacman::p_load(
+  tidyverse,        # Used for basic data handling and visualization.
+  readxl,           # Used to read Excel files.
+  PRISMA2020,
+  htmltools,
+  htmlwidgets,
+  webshot2,
+  pagedown,
+  chromote,
+  gt,               # Used to print html tables.  
+  report            # Used to cite packages used in this session.   
+)
+```
+
+# Probability of Causation (PoC) ASReview screened and included records
+
+```{r}
+asreview_initial <- read_csv(
+  paste0(asreview,"/2025_07_25_Evaluation_of_the_probability_of_causation_for_lung_cancer_workers_compensation.csv")
+)
+```
+
+```{r}
+asreview_initial_count <- asreview_initial %>% 
+  filter(!is.na(asreview_label)) %>% 
+  group_by(asreview_label) %>%
+  summarise(n = n())
+```
+
+The initial deduplicated dataset included n = `r count(asreview_initial)` records, out of which n = `r sum(asreview_initial_count$n)` were screened with ASReview, resulting in n = `r asreview_initial_count$n[1]` irrelevant and n = `r asreview_initial_count$n[2]` relevant records.
+
+```{r}
+fulltext_initial <- read_csv(
+  paste0(psfolder,"/PoC/2025-08-15_PoC_snowball.csv")
+)
+```
+
+```{r}
+fulltext_initial_count <- fulltext_initial %>% 
+  filter(!is.na(included)) %>% 
+  group_by(included) %>%
+  summarise(n = n())
+```
+
+After full-text review, reclassification of studies resulted in n = `r fulltext_initial_count$n[1]` irrelevant and n = `r fulltext_initial_count$n[2]` relevant records. Therefore, a total of n = `r fulltext_initial_count$n[1] - asreview_initial_count$n[1]` irrelevant records were excluded due to the following reasons:
+
+```{r}
+excluded_initial <- fulltext_initial %>% 
+  filter(included == 0) %>% 
+  group_by(poc, quantitative, lung_cancer) %>%
+  summarise(n = n()) %>% 
+  ungroup() 
+
+excluded_initial %>% gt()
+```
+
+To summarize these reasons for exclusion, the following hierarchy was applied: poc \> lung_cancer \> quantitative.
+
+```{r}
+excluded_initial_poc <- excluded_initial %>% 
+  group_by(poc) %>%
+  summarise(n = sum(n)) 
+
+excluded_initial_lung <- excluded_initial %>% 
+  filter(poc == 1) %>% 
+  group_by(lung_cancer) %>%
+  summarise(n = sum(n)) 
+
+excluded_initial_quantitative <- excluded_initial %>% 
+  filter(poc == 1 & lung_cancer == 1) %>% 
+  group_by(quantitative) %>%
+  summarise(n = sum(n)) 
+```
+
+-   Not PoC, n = `r excluded_initial_poc$n[1]`
+-   Not lung cancer, n = `r excluded_initial_lung$n[1]`
+-   Not quantitative exposure-response, n = `r excluded_initial_quantitative$n[1]`
+
+{{< pagebreak >}}
+
+# PoC snowball citation ASReview screened and included records
+
+```{r}
+# Load data 
+
+asreview_snowball <- read_csv(
+  paste0(asreview,"/2025_08_18_Final_Evaluation_of_the_probability_of_causation_for_lung_cancer_workers_compensation.csv")
+)
+
+asreview_snowball_screened <- asreview_snowball %>% 
+  filter(asreview_time > ymd_hms("2025-08-15 12:16:58")) 
+```
+
+```{r}
+asreview_snowball_count <- asreview_snowball_screened %>% 
+  filter(!is.na(asreview_label)) %>% 
+  group_by(asreview_label) %>%
+  summarise(n = n())
+```
+
+The updated dataset with the citations of the originally identified studies included n = `r count(asreview_snowball)` records, out of which n = `r sum(asreview_snowball_count$n)` were screened with ASReview, resulting in n = `r asreview_snowball_count$n[1]` irrelevant and n = `r asreview_snowball_count$n[2]` relevant records.
+
+```{r}
+fulltext_snowball <- read_xlsx(
+  file.path(psfolder,"/PoC/2025_08_18_PoC_snowball_asreview.xlsx") 
+) %>% 
+  mutate(asreview_time = ymd_hms(asreview_time)) %>% 
+  filter(asreview_time > ymd_hms("2025-08-15 12:16:58")) 
+```
+
+```{r}
+fulltext_snowball_count <- fulltext_snowball %>% 
+  filter(!is.na(asreview_label)) %>% 
+  group_by(asreview_label) %>%
+  summarise(n = n())
+```
+
+After full-text review, reclassification of studies resulted in n = `r fulltext_snowball_count$n[1]` irrelevant and n = `r fulltext_snowball_count$n[2]` relevant records. Therefore, a total of n = `r fulltext_snowball_count$n[1] - asreview_snowball_count$n[1]` irrelevant records were excluded due to the following reasons:
+
+```{r}
+excluded_snowball <- fulltext_snowball %>% 
+  filter(included == 0) %>% 
+  group_by(poc, quantitative, lung_cancer) %>%
+  summarise(n = n()) %>% 
+  ungroup() 
+
+excluded_snowball %>% gt()
+```
+
+-   Not PoC, n = 0
+-   Not lung cancer, n = `r sum(excluded_snowball$n)`
+
+{{< pagebreak >}}
+
+# PRISMA diagram
+
+The PRISMA2020 R package[@Haddaway2022] was used to present the flow of studies in this review.
+
+```{r}
+#| eval: false
+#| echo: true
+source("scripts/PRISMA.R")
+```
+
+Since the produced diagram little flexibility to report screening of citations, the PRISMA_flowdiagram function was modified to allow for additional reporting.
+
+```{r}
+#| eval: false 
+#| echo: true
+
+source("scripts/PRISMA_flowdiagram_modified.R")
+
+source("scripts/PRISMA_enhanced.R")
+```
+
+![](images/PRISMA_PoC.png){fig-align="center"}
+
+{{< pagebreak >}}
+
+# References
+
+::: {#refs}
+:::
+
+{{< pagebreak >}}
+
+```{r}
+#| label: session
+# remove clutter
+session <- sessionInfo()
+session$BLAS <- NULL
+session$LAPACK <- NULL
+session$loadedOnly <- NULL
+# write log file
+writeLines(
+  capture.output(print(session, locale = FALSE)),
+  paste0("sessions/",lubridate::today(), "_studies_included.txt")
+)                                   
+```
+
+# Package References
+
+```{r}
+#| output: asis
+report::cite_packages(session)
+```
+
+> For specific information on the operating system, R version, and R package versions used, please refer to the R/session folder in the GitHub repository.
+
+```{r}
+#| include: false
+
+# Run this chunk if you wish to clear your environment and unload packages.
+
+pacman::p_unload(negate = TRUE)
+
+rm(list = ls())
+```

@@ -4,7 +4,7 @@
 
 This is a scoping review of the methods applied for the calculation of the probability of causation (PoC) or assigned share of a disease or health outcome due to an (occupational) exposure. The main interests are on uses for lung cancer and its financial compensation in the context of occupational exposures, although flexibility will be allowed within the framework of a scoping review to gain further insight into the concept, methods, and potential alternatives in other use cases.
 
-This study is preregistered in the Open Science Framework: [https://doi.org/10.17605/OSF.IO/9EVSY](https://doi.org/10.17605/OSF.IO/9EVSY)
+This study is registered in the Open Science Framework: [https://doi.org/10.17605/OSF.IO/9EVSY](https://doi.org/10.17605/OSF.IO/9EVSY)
 
 ## How to use 
 
@@ -19,8 +19,6 @@ The suggested use of this repository starts with making sure that R and RStudio 
 
 If you are not able to follow the prior steps, you may also consider reviewing the [documents](docs/reports) explaining and documenting the analyses. 
 
-Although I have made significant efforts to ensure reproducibility of this project, I encourage you to [contact me](mailto:j.mancillagalindo@uu.nl) or post a request in this repository in case you encounter any issues.   
-
 ### Code 
 
 -   [literature_search.qmd](R/literature_search.qmd). 
@@ -28,6 +26,7 @@ Although I have made significant efforts to ensure reproducibility of this proje
 -   [deduplication.qmd](R/data_extraction.qmd).
 -   [screening.qmd](R/data_analysis.qmd).
 -   [citations.qmd](R/citations.qmd).
+-   [studies_included.qmd](R/citations.qmd).
 
 ### Protocol versions 
 
@@ -66,6 +65,8 @@ The project structure distinguishes three kinds of folders:
     └── sessions          <- Text files with information of R sessions (PG)
 
 ```
+
+Although I have made significant efforts to ensure reproducibility of this project, I encourage you to [contact me](mailto:j.mancillagalindo@uu.nl) or post a request in this repository in case you encounter any issues.   
 
 ## License
 
